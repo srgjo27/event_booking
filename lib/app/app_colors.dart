@@ -5,6 +5,6 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color primary = Color(0xFF4A43EC);
-  // Tambahkan warna lain di bawah ini sesuai kebutuhan
+  static const Color primary = Color(0xFF3D56F0);
+  static const Color textSecondary = Color(0xFF9D9898);
 }

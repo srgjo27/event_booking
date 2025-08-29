@@ -1,3 +1,4 @@
+import 'package:event_booking/app/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:event_booking/app/app.bottomsheets.dart';
 import 'package:event_booking/app/app.dialogs.dart';
@@ -30,6 +31,15 @@ class MainApp extends StatelessWidget {
           theme: ThemeData(
             brightness: Brightness.light,
             scaffoldBackgroundColor: Colors.white,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: AppColors.primary,
+              brightness: Brightness.light,
+            ),
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: Colors.grey.shade400,
+              selectionColor: Colors.grey.shade400,
+              selectionHandleColor: Colors.grey.shade400,
+            ),
           ),
           initialRoute: Routes.startupView,
           onGenerateRoute: StackedRouter().onGenerateRoute,

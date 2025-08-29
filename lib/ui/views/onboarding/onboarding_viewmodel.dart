@@ -58,12 +58,12 @@ class OnboardingViewModel extends BaseViewModel {
         curve: Curves.ease,
       );
     } else {
-      _navigationService.replaceWithHomeView();
+      _navigationService.replaceWithLoginView();
     }
   }
 
   void skip() {
-    _navigationService.replaceWithHomeView();
+    _navigationService.replaceWithLoginView();
   }
 
   @override
