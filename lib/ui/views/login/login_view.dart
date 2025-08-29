@@ -1,6 +1,8 @@
 import 'package:event_booking/app/app_colors.dart';
+import 'package:event_booking/app/app_icons.dart';
 import 'package:event_booking/ui/views/login/login_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:event_booking/app/app_images.dart';
@@ -47,8 +49,15 @@ class LoginView extends StackedView<LoginViewModel> {
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: 'abc@email.com',
-                      prefixIcon: Icon(Icons.email_outlined,
-                          color: Colors.grey.shade400),
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.all(12.w),
+                        child: SvgPicture.asset(
+                          AppIcons.icMessage,
+                          colorFilter: ColorFilter.mode(
+                              Colors.grey.shade400, BlendMode.srcIn),
+                          width: 24.w,
+                        ),
+                      ),
                       filled: true,
                       fillColor: Colors.white,
                       enabledBorder: OutlineInputBorder(
@@ -69,15 +78,27 @@ class LoginView extends StackedView<LoginViewModel> {
                     obscureText: !viewModel.isPasswordVisible,
                     decoration: InputDecoration(
                       hintText: 'Your password',
-                      prefixIcon:
-                          Icon(Icons.lock_outline, color: Colors.grey.shade400),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          viewModel.isPasswordVisible
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                          color: Colors.grey.shade400,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.all(12.w),
+                        child: SvgPicture.asset(
+                          AppIcons.icLock,
+                          colorFilter: ColorFilter.mode(
+                              Colors.grey.shade400, BlendMode.srcIn),
+                          width: 24.w,
                         ),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: viewModel.isPasswordVisible
+                            ? Icon(
+                                Icons.visibility_outlined,
+                                color: Colors.grey.shade400,
+                              )
+                            : SvgPicture.asset(
+                                AppIcons.icHidden,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.grey.shade400, BlendMode.srcIn),
+                                width: 24.w,
+                              ),
                         onPressed: viewModel.togglePasswordVisibility,
                       ),
                       filled: true,
@@ -107,8 +128,10 @@ class LoginView extends StackedView<LoginViewModel> {
                               onChanged: viewModel.setRememberMe,
                               activeColor: Colors.white,
                               activeTrackColor: AppColors.primary,
-                              inactiveThumbColor: Colors.grey.shade300,
+                              inactiveThumbColor: Colors.grey.shade400,
                               inactiveTrackColor: Colors.white,
+                              trackOutlineColor:
+                                  WidgetStateProperty.all(Colors.grey.shade300),
                               trackOutlineWidth:
                                   WidgetStateProperty.resolveWith<double>(
                                 (states) => 1.w,
