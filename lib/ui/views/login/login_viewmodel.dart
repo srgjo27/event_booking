@@ -27,9 +27,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   void signIn() {
-    debugPrint('Email: ${emailController.text}');
-    debugPrint('Password: ${passwordController.text}');
-    debugPrint('Remember Me: $_rememberMe');
+    _navigationService.navigateToVerficationView();
   }
 
   void loginWithGoogle() {

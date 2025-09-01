@@ -1,8 +1,8 @@
+import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:event_booking/app/app_colors.dart';
 import 'package:stacked/stacked.dart';
 
 import 'onboarding_viewmodel.dart';
@@ -44,7 +44,7 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
               flex: 2,
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.primary,
+                  color: AppColors.kcPrimaryColor,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.r),
                     topRight: Radius.circular(50.r),

@@ -4,7 +4,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:event_booking/app/app.locator.dart';
 
-import 'package:event_booking/app/app_images.dart';
+import 'package:event_booking/ui/common/app_images.dart';
 
 class OnboardingContent {
   final String image;

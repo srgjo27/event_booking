@@ -1,6 +1,8 @@
-import 'package:event_booking/app/app_colors.dart';
-import 'package:event_booking/app/app_icons.dart';
-import 'package:event_booking/app/app_images.dart';
+import 'package:event_booking/ui/common/app_colors.dart';
+import 'package:event_booking/ui/common/app_icons.dart';
+import 'package:event_booking/ui/common/app_images.dart';
+import 'package:event_booking/ui/common/custom_text_field.dart';
+import 'package:event_booking/ui/common/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -38,38 +40,78 @@ class RegisterView extends StackedView<RegisterViewModel> {
                   'Sign up',
                   style: Theme.of(context)
                       .textTheme
-                      .titleMedium
-                      ?.copyWith(fontSize: 24.sp),
+                      .headlineMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20.h),
-                _buildFullNameField(viewModel),
+                CustomTextField(
+                  controller: viewModel.fullNameController,
+                  hintText: 'Full name',
+                  keyboardType: TextInputType.text,
+                  prefixIconName: AppIcons.icUser,
+                ),
                 SizedBox(height: 16.h),
-                _buildEmailField(viewModel),
+                CustomTextField(
+                  controller: viewModel.emailController,
+                  hintText: 'yourmail@example.com',
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIconName: AppIcons.icMessage,
+                ),
                 SizedBox(height: 16.h),
-                _buildPasswordField(
-                  context: context,
+                CustomTextField(
                   controller: viewModel.passwordController,
+                  obscureText: !viewModel.isPasswordVisible,
                   hintText: 'Your password',
-                  isPasswordVisible: viewModel.isPasswordVisible,
-                  toggleVisibility: viewModel.togglePasswordVisibility,
+                  prefixIconName: AppIcons.icLock,
+                  suffixIcon: IconButton(
+                    icon: viewModel.isPasswordVisible
+                        ? Icon(
+                            Icons.visibility_outlined,
+                            color: Colors.grey.shade400,
+                          )
+                        : SvgPicture.asset(
+                            AppIcons.icHidden,
+                            colorFilter: ColorFilter.mode(
+                                Colors.grey.shade400, BlendMode.srcIn),
+                            width: 24.w,
+                          ),
+                    onPressed: viewModel.togglePasswordVisibility,
+                  ),
                 ),
                 SizedBox(height: 16.h),
-                _buildPasswordField(
-                  context: context,
+                CustomTextField(
                   controller: viewModel.confirmPasswordController,
+                  obscureText: !viewModel.isPasswordVisible,
                   hintText: 'Confirm password',
-                  isPasswordVisible: viewModel.isPasswordVisible,
-                  toggleVisibility: viewModel.togglePasswordVisibility,
+                  prefixIconName: AppIcons.icLock,
+                  suffixIcon: IconButton(
+                    icon: viewModel.isPasswordVisible
+                        ? Icon(
+                            Icons.visibility_outlined,
+                            color: Colors.grey.shade400,
+                          )
+                        : SvgPicture.asset(
+                            AppIcons.icHidden,
+                            colorFilter: ColorFilter.mode(
+                                Colors.grey.shade400, BlendMode.srcIn),
+                            width: 24.w,
+                          ),
+                    onPressed: viewModel.togglePasswordVisibility,
+                  ),
                 ),
                 SizedBox(height: 20.h),
-                _buildSignUpButton(context, viewModel),
+                PrimaryButton(
+                  text: 'SIGN UP',
+                  onPressed: viewModel.signUp,
+                  color: AppColors.kcPrimaryColor,
+                  icon: Icons.arrow_forward,
+                ),
                 SizedBox(height: 24.h),
                 Center(
-                  child: Text(
-                    'OR',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textSecondary, fontSize: 14.sp),
-                  ),
+                  child: Text('OR',
+                      style: TextTheme.of(context)
+                          .bodyMedium
+                          ?.copyWith(color: AppColors.kcLightGrey)),
                 ),
                 SizedBox(height: 16.h),
                 _buildSocialLoginButton(
@@ -87,159 +129,6 @@ class RegisterView extends StackedView<RegisterViewModel> {
                 _buildSignInText(context, viewModel),
               ],
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFullNameField(RegisterViewModel viewModel) {
-    return TextField(
-      controller: viewModel.fullNameController,
-      keyboardType: TextInputType.text,
-      decoration: InputDecoration(
-        hintText: 'Full name',
-        prefixIcon: Padding(
-          padding: EdgeInsets.all(12.w),
-          child: SvgPicture.asset(
-            AppIcons.icUser,
-            colorFilter:
-                ColorFilter.mode(Colors.grey.shade400, BlendMode.srcIn),
-            width: 20.w,
-          ),
-        ),
-        filled: true,
-        fillColor: Colors.white,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildEmailField(RegisterViewModel viewModel) {
-    return TextField(
-      controller: viewModel.emailController,
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        hintText: 'abc@email.com',
-        prefixIcon: Padding(
-          padding: EdgeInsets.all(12.w),
-          child: SvgPicture.asset(
-            AppIcons.icMessage,
-            colorFilter:
-                ColorFilter.mode(Colors.grey.shade400, BlendMode.srcIn),
-            width: 24.w,
-          ),
-        ),
-        filled: true,
-        fillColor: Colors.white,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPasswordField({
-    required BuildContext context,
-    required TextEditingController controller,
-    required String hintText,
-    required bool isPasswordVisible,
-    required VoidCallback toggleVisibility,
-  }) {
-    return TextField(
-      controller: controller,
-      obscureText: !isPasswordVisible,
-      decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: Padding(
-          padding: EdgeInsets.all(12.w),
-          child: SvgPicture.asset(
-            AppIcons.icLock,
-            colorFilter:
-                ColorFilter.mode(Colors.grey.shade400, BlendMode.srcIn),
-            width: 24.w,
-          ),
-        ),
-        suffixIcon: IconButton(
-          icon: isPasswordVisible
-              ? Icon(Icons.visibility_outlined, color: Colors.grey.shade400)
-              : SvgPicture.asset(
-                  AppIcons.icHidden,
-                  colorFilter:
-                      ColorFilter.mode(Colors.grey.shade400, BlendMode.srcIn),
-                  width: 24.w,
-                ),
-          onPressed: toggleVisibility,
-        ),
-        filled: true,
-        fillColor: Colors.white,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSignUpButton(BuildContext context, RegisterViewModel viewModel) {
-    return SizedBox(
-      width: double.infinity,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.r),
-          color: AppColors.primary,
-        ),
-        child: ElevatedButton(
-          onPressed: viewModel.signUp,
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 12.h),
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(36.r),
-            ),
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Center(
-                child: Text(
-                  'SIGN UP',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.white,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              Positioned(
-                right: 20.w,
-                child: Container(
-                  padding: EdgeInsets.all(4.w),
-                  decoration: const BoxDecoration(
-                    color: Colors.white24,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(Icons.arrow_forward,
-                      color: Colors.white, size: 16.sp),
-                ),
-              ),
-            ],
           ),
         ),
       ),
@@ -266,7 +155,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
           ),
         ),
         icon: Image.asset(iconPath, width: 24.w),
-        label: Text(label, style: TextStyle(fontSize: 15.sp)),
+        label: Text(label, style: TextStyle(fontSize: 14.sp)),
       ),
     );
   }
@@ -277,8 +166,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
       children: [
         Text(
           "Already have an account?",
-          style:
-              Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 14.sp),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
         ),
         TextButton(
           onPressed: viewModel.navigateToSignIn,
@@ -287,7 +175,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
-                ?.copyWith(fontSize: 14.sp, color: AppColors.primary),
+                ?.copyWith(color: AppColors.kcPrimaryColor),
           ),
         ),
       ],

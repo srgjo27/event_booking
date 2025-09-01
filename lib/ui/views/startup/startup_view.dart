@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:event_booking/app/app_images.dart';
+import 'package:event_booking/ui/common/app_images.dart';
 
 import 'startup_viewmodel.dart';
 

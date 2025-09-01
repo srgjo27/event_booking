@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:event_booking/ui/views/onboarding/onboarding_view.dart';
 import 'package:event_booking/ui/views/login/login_view.dart';
 import 'package:event_booking/ui/views/register/register_view.dart';
+import 'package:event_booking/ui/views/verfication/verfication_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -16,6 +17,7 @@ import 'package:event_booking/ui/views/register/register_view.dart';
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: RegisterView),
+    MaterialRoute(page: VerficationView),
 // @stacked-route
   ],
   dependencies: [

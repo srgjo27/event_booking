@@ -1,11 +1,13 @@
-import 'package:event_booking/app/app_colors.dart';
-import 'package:event_booking/app/app_icons.dart';
+import 'package:event_booking/ui/common/app_colors.dart';
+import 'package:event_booking/ui/common/app_icons.dart';
+import 'package:event_booking/ui/common/custom_text_field.dart';
+import 'package:event_booking/ui/common/primary_button.dart';
 import 'package:event_booking/ui/views/login/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:event_booking/app/app_images.dart';
+import 'package:event_booking/ui/common/app_images.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginView extends StackedView<LoginViewModel> {
@@ -39,80 +41,37 @@ class LoginView extends StackedView<LoginViewModel> {
                   SizedBox(height: 32.h),
                   Text(
                     'Sign in',
-                    style: TextTheme.of(context)
-                        .titleMedium
-                        ?.copyWith(fontSize: 24.sp),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 20.h),
-                  TextField(
+                  CustomTextField(
                     controller: viewModel.emailController,
+                    hintText: 'yourmail@example.com',
                     keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      hintText: 'abc@email.com',
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.all(12.w),
-                        child: SvgPicture.asset(
-                          AppIcons.icMessage,
-                          colorFilter: ColorFilter.mode(
-                              Colors.grey.shade400, BlendMode.srcIn),
-                          width: 24.w,
-                        ),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r),
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade300, width: 1.w),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r),
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade300, width: 1.w),
-                      ),
-                    ),
+                    prefixIconName: AppIcons.icMessage,
                   ),
                   SizedBox(height: 16.h),
-                  TextField(
+                  CustomTextField(
                     controller: viewModel.passwordController,
                     obscureText: !viewModel.isPasswordVisible,
-                    decoration: InputDecoration(
-                      hintText: 'Your password',
-                      prefixIcon: Padding(
-                        padding: EdgeInsets.all(12.w),
-                        child: SvgPicture.asset(
-                          AppIcons.icLock,
-                          colorFilter: ColorFilter.mode(
-                              Colors.grey.shade400, BlendMode.srcIn),
-                          width: 24.w,
-                        ),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: viewModel.isPasswordVisible
-                            ? Icon(
-                                Icons.visibility_outlined,
-                                color: Colors.grey.shade400,
-                              )
-                            : SvgPicture.asset(
-                                AppIcons.icHidden,
-                                colorFilter: ColorFilter.mode(
-                                    Colors.grey.shade400, BlendMode.srcIn),
-                                width: 24.w,
-                              ),
-                        onPressed: viewModel.togglePasswordVisibility,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r),
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade300, width: 1.w),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15.r),
-                        borderSide:
-                            BorderSide(color: Colors.grey.shade300, width: 1.w),
-                      ),
+                    hintText: 'Your password',
+                    prefixIconName: AppIcons.icLock,
+                    suffixIcon: IconButton(
+                      icon: viewModel.isPasswordVisible
+                          ? Icon(
+                              Icons.visibility_outlined,
+                              color: Colors.grey.shade400,
+                            )
+                          : SvgPicture.asset(
+                              AppIcons.icHidden,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.grey.shade400, BlendMode.srcIn),
+                              width: 24.w,
+                            ),
+                      onPressed: viewModel.togglePasswordVisibility,
                     ),
                   ),
                   SizedBox(height: 16.h),
@@ -127,7 +86,7 @@ class LoginView extends StackedView<LoginViewModel> {
                               value: viewModel.rememberMe,
                               onChanged: viewModel.setRememberMe,
                               activeColor: Colors.white,
-                              activeTrackColor: AppColors.primary,
+                              activeTrackColor: AppColors.kcPrimaryColor,
                               inactiveThumbColor: Colors.grey.shade400,
                               inactiveTrackColor: Colors.white,
                               trackOutlineColor:
@@ -139,76 +98,32 @@ class LoginView extends StackedView<LoginViewModel> {
                             ),
                           ),
                           Text('Remember Me',
-                              style: TextTheme.of(context)
-                                  .bodyMedium
-                                  ?.copyWith(fontSize: 14.sp)),
+                              style:
+                                  TextTheme.of(context).bodyMedium?.copyWith()),
                         ],
                       ),
                       TextButton(
                         onPressed: () {},
                         child: Text(
                           'Forgot Password?',
-                          style: TextTheme.of(context)
-                              .bodyMedium
-                              ?.copyWith(fontSize: 14.sp),
+                          style: TextTheme.of(context).bodyMedium?.copyWith(),
                         ),
                       ),
                     ],
                   ),
                   SizedBox(height: 20.h),
-                  SizedBox(
-                    width: double.infinity,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.r),
-                        color: AppColors.primary,
-                      ),
-                      child: ElevatedButton(
-                        onPressed: viewModel.signIn,
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(36.r),
-                          ),
-                        ),
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Center(
-                              child: Text(
-                                'SIGN IN',
-                                style: TextTheme.of(context)
-                                    .bodyMedium
-                                    ?.copyWith(
-                                        color: Colors.white,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                            Positioned(
-                              right: 20.w,
-                              child: Container(
-                                padding: EdgeInsets.all(4.w),
-                                decoration: const BoxDecoration(
-                                  color: Colors.white24,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(Icons.arrow_forward,
-                                    color: Colors.white, size: 16.sp),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                  PrimaryButton(
+                    text: 'SIGN IN',
+                    onPressed: viewModel.signIn,
+                    color: AppColors.kcPrimaryColor,
+                    icon: Icons.arrow_forward,
                   ),
                   SizedBox(height: 24.h),
                   Center(
                     child: Text('OR',
-                        style: TextTheme.of(context).bodyMedium?.copyWith(
-                            color: AppColors.textSecondary, fontSize: 14.sp)),
+                        style: TextTheme.of(context)
+                            .bodyMedium
+                            ?.copyWith(color: AppColors.kcLightGrey)),
                   ),
                   SizedBox(height: 16.h),
                   _buildSocialLoginButton(
@@ -223,23 +138,7 @@ class LoginView extends StackedView<LoginViewModel> {
                     label: 'Login with Facebook',
                   ),
                   SizedBox(height: 16.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Don't have an account?",
-                          style: TextTheme.of(context)
-                              .bodyMedium
-                              ?.copyWith(fontSize: 14.sp)),
-                      TextButton(
-                        onPressed: viewModel.navigateToSignUp,
-                        child: Text(
-                          'Sign up',
-                          style: TextTheme.of(context).bodyMedium?.copyWith(
-                              fontSize: 14.sp, color: AppColors.primary),
-                        ),
-                      ),
-                    ],
-                  ),
+                  _buildSignUpText(context, viewModel),
                 ],
               ),
             ),
@@ -269,8 +168,30 @@ class LoginView extends StackedView<LoginViewModel> {
           ),
         ),
         icon: Image.asset(iconPath, width: 24.w),
-        label: Text(label, style: TextStyle(fontSize: 15.sp)),
+        label: Text(label, style: TextStyle(fontSize: 14.sp)),
       ),
+    );
+  }
+
+  Widget _buildSignUpText(BuildContext context, LoginViewModel viewModel) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Don't have an account?",
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+        ),
+        TextButton(
+          onPressed: viewModel.navigateToSignUp,
+          child: Text(
+            'Sign up',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: AppColors.kcPrimaryColor),
+          ),
+        ),
+      ],
     );
   }
 
