@@ -1,8 +1,12 @@
 import 'dart:async';
+import 'package:event_booking/app/app.locator.dart';
+import 'package:event_booking/app/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class VerficationViewModel extends BaseViewModel {
+  final _navigationService = locator<NavigationService>();
   final pinController = TextEditingController();
   final focusNode = FocusNode();
 
@@ -43,7 +47,7 @@ class VerficationViewModel extends BaseViewModel {
   }
 
   void verifyCode() {
-    debugPrint('Verifying code: ${pinController.text}');
+    _navigationService.navigateToHomeView();
   }
 
   @override

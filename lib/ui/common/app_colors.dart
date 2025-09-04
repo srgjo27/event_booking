@@ -8,4 +8,8 @@ class AppColors {
   static const Color kcLightGrey = Color.fromARGB(255, 187, 187, 187);
   static const Color kcVeryLightGrey = Color(0xFFE3E3E3);
   static const Color kcBackgroundColor = kcDarkGreyColor;
+  static const Color kcSportsColor = Color(0xFFF0635A);
+  static const Color kcMusicColor = Color(0xFFF59762);
+  static const Color kcFoodColor = Color(0xFF29D697);
+  static const Color kcArtColor = Color(0xFF46CDFB);
 }

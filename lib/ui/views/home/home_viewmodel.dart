@@ -1,36 +1,39 @@
-import 'package:event_booking/app/app.bottomsheets.dart';
-import 'package:event_booking/app/app.dialogs.dart';
-import 'package:event_booking/app/app.locator.dart';
-import 'package:event_booking/ui/common/app_strings.dart';
+import 'package:event_booking/ui/common/app_colors.dart';
+import 'package:event_booking/ui/common/app_icons.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
+
+class Category {
+  final String name;
+  final String icon;
+  final Color color;
+
+  Category({required this.name, required this.icon, required this.color});
+}
 
 class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+  int _selectedIndex = 0;
+  int get selectedIndex => _selectedIndex;
 
-  String get counterLabel => 'Counter is: $_counter';
+  String? _selectedCategory;
+  String? get selectedCategory => _selectedCategory;
 
-  int _counter = 0;
-
-  void incrementCounter() {
-    _counter++;
-    rebuildUi();
+  void onTabTapped(int index) {
+    _selectedIndex = index;
+    notifyListeners();
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Stacked Rocks!',
-      description: 'Give stacked $_counter stars on Github',
-    );
+  void selectCategory(String? category) {
+    _selectedCategory = category;
+    notifyListeners();
   }
 
-  void showBottomSheet() {
-    _bottomSheetService.showCustomSheet(
-      variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
-    );
-  }
+  final List<Category> categories = [
+    Category(
+        name: 'Sports', icon: AppIcons.icSport, color: AppColors.kcSportsColor),
+    Category(
+        name: 'Music', icon: AppIcons.icMusic, color: AppColors.kcMusicColor),
+    Category(name: 'Food', icon: AppIcons.icFood, color: AppColors.kcFoodColor),
+    Category(name: 'Art', icon: AppIcons.icArt, color: AppColors.kcArtColor),
+  ];
 }

@@ -16,4 +16,6 @@ class AppImages {
       'assets/images/illustration_onboarding_3.png';
   static const String imgGoogleLogo = 'assets/images/img_google.png';
   static const String imgFacebookLogo = 'assets/images/img_facebook.png';
+  static const String imgNotification = 'assets/images/img_notification.png';
+  static const String imgFilter = 'assets/images/img_filter.png';
 }
