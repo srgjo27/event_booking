@@ -1,5 +1,6 @@
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
+import 'package:event_booking/ui/common/custom_switch.dart';
 import 'package:event_booking/ui/common/custom_text_field.dart';
 import 'package:event_booking/ui/common/primary_button.dart';
 import 'package:event_booking/ui/views/login/login_viewmodel.dart';
@@ -81,20 +82,10 @@ class LoginView extends StackedView<LoginViewModel> {
                       Row(
                         children: [
                           Transform.scale(
-                            scale: 0.7.w,
-                            child: Switch(
+                            scale: 0.6.w,
+                            child: CustomSwitch(
                               value: viewModel.rememberMe,
                               onChanged: viewModel.setRememberMe,
-                              activeColor: Colors.white,
-                              activeTrackColor: AppColors.kcPrimaryColor,
-                              inactiveThumbColor: Colors.grey.shade400,
-                              inactiveTrackColor: Colors.white,
-                              trackOutlineColor:
-                                  WidgetStateProperty.all(Colors.grey.shade300),
-                              trackOutlineWidth:
-                                  WidgetStateProperty.resolveWith<double>(
-                                (states) => 1.w,
-                              ),
                             ),
                           ),
                           Text('Remember Me',

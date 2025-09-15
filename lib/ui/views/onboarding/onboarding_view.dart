@@ -29,7 +29,7 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(
-                        top: 40.h, left: 20.w, right: 20.w, bottom: 20.h),
+                        top: 40.h, left: 16.w, right: 16.w, bottom: 20.h),
                     child: Image.asset(
                       viewModel.contents[index].image,
                       fit: BoxFit.contain,
@@ -52,7 +52,7 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
                 ),
                 child: Padding(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 30.h),
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 32.h),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -61,22 +61,20 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
                           Text(
                             viewModel.contents[viewModel.currentPage].title,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22.sp,
-                              fontWeight: FontWeight.bold,
-                              height: 1.3,
-                            ),
+                            style:
+                                TextTheme.of(context).headlineMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                           ),
                           SizedBox(height: 20.h),
                           Text(
                             viewModel
                                 .contents[viewModel.currentPage].description,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white.withAlpha(179),
-                              fontSize: 15.sp,
-                            ),
+                            style: TextTheme.of(context).titleMedium?.copyWith(
+                                  color: Colors.white.withAlpha(179),
+                                ),
                           ),
                         ],
                       ),
@@ -133,8 +131,8 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         margin: EdgeInsets.only(right: 8.w),
-        height: 10.w,
-        width: 10.w,
+        height: 8.w,
+        width: 8.w,
         decoration: BoxDecoration(
           color: viewModel.currentPage == index
               ? Colors.white

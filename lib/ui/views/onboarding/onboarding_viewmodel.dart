@@ -34,7 +34,7 @@ class OnboardingViewModel extends BaseViewModel {
     ),
     OnboardingContent(
       image: AppImages.illustrationOnboarding2,
-      title: 'We Have Modern Events\nCalendar Feature',
+      title: 'Web Have Modern Events\nCalendar Feature',
       description:
           'In publishing and graphic design, Lorem is a placeholder text commonly',
     ),
