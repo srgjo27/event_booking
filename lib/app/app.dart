@@ -1,6 +1,6 @@
 import 'package:event_booking/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:event_booking/ui/dialogs/info_alert/info_alert_dialog.dart';
-import 'package:event_booking/ui/views/home/home_view.dart';
+import 'package:event_booking/ui/views/main/main_view.dart';
 import 'package:event_booking/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -12,7 +12,7 @@ import 'package:event_booking/ui/views/verfication/verfication_view.dart';
 
 @StackedApp(
   routes: [
-    MaterialRoute(page: HomeView),
+    MaterialRoute(page: MainView),
     MaterialRoute(page: StartupView),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: LoginView),

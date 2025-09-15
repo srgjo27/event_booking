@@ -1,7 +1,7 @@
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
 import 'package:event_booking/ui/common/app_images.dart';
-import 'package:event_booking/ui/common/bottom_nav_bar.dart';
+import 'package:event_booking/ui/common/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,46 +9,32 @@ import 'package:stacked/stacked.dart';
 
 import 'home_viewmodel.dart';
 
-class HomeView extends StackedView<HomeViewModel> {
-  const HomeView({Key? key}) : super(key: key);
+class HomeContent extends StackedView<HomeViewModel> {
+  const HomeContent({Key? key}) : super(key: key);
 
   @override
   Widget builder(BuildContext context, HomeViewModel viewModel, Widget? child) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      resizeToAvoidBottomInset: false,
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        behavior: HitTestBehavior.translucent,
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                _buildHeader(context, viewModel),
-                _buildBody(context, viewModel),
-              ],
-            ),
-            Positioned(
-              top: 140.h,
-              left: 0,
-              right: 0,
-              child: _buildCategoryList(context, viewModel),
-            ),
-          ],
-        ),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      behavior: HitTestBehavior.translucent,
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              _buildHeader(context, viewModel),
+              Expanded(
+                child: _buildBody(context, viewModel),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 140.h,
+            left: 0,
+            right: 0,
+            child: _buildCategoryList(context, viewModel),
+          ),
+        ],
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        selectedIndex: viewModel.selectedIndex,
-        onTabTapped: viewModel.onTabTapped,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: AppColors.kcPrimaryColor,
-        shape: const CircleBorder(),
-        elevation: 0,
-        child: SvgPicture.asset(AppIcons.icAddBox),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
@@ -65,7 +51,7 @@ class HomeView extends StackedView<HomeViewModel> {
       child: SafeArea(
         bottom: false,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: Column(
             children: [
               SizedBox(height: 8.h),
@@ -98,7 +84,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   Image.asset(AppImages.imgNotification),
                 ],
               ),
-              SizedBox(height: 20.h),
+              SizedBox(height: 16.h),
               Row(
                 children: [
                   Expanded(
@@ -120,7 +106,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   ),
                   SizedBox(width: 6.w),
                   Container(
-                    padding: EdgeInsets.all(8.w),
+                    padding: EdgeInsets.all(6.w),
                     decoration: BoxDecoration(
                       color: Colors.white.withAlpha(51),
                       borderRadius: BorderRadius.circular(36.r),
@@ -150,27 +136,66 @@ class HomeView extends StackedView<HomeViewModel> {
       height: 36.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        itemCount: viewModel.categories.length,
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        itemCount: viewModel.categories.length + 1,
         itemBuilder: (context, index) {
-          final category = viewModel.categories[index];
-          return Container(
-            margin: EdgeInsets.only(right: 8.w),
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            decoration: BoxDecoration(
-              color: category.color,
-              borderRadius: BorderRadius.circular(36.r),
-            ),
-            child: Row(
-              children: [
-                SvgPicture.asset(category.icon),
-                SizedBox(width: 8.w),
-                Text(
-                  category.name,
-                  style: TextTheme.of(context).bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold, color: Colors.white),
+          if (index == 0) {
+            final isSelected = viewModel.selectedCategory == null;
+
+            return GestureDetector(
+              onTap: () => viewModel.selectCategory(null),
+              child: Container(
+                margin: EdgeInsets.only(right: 8.w),
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                decoration: BoxDecoration(
+                  color: isSelected
+                      ? AppColors.kcPrimaryColor
+                      : Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(36.r),
                 ),
-              ],
+                child: Center(
+                  child: Text(
+                    'All',
+                    style: TextTheme.of(context).bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color:
+                            isSelected ? Colors.white : Colors.grey.shade500),
+                  ),
+                ),
+              ),
+            );
+          }
+
+          final category = viewModel.categories[index - 1];
+          final isSelected = viewModel.selectedCategory == category.name;
+
+          return GestureDetector(
+            onTap: () => viewModel.selectCategory(category.name),
+            child: Container(
+              margin: EdgeInsets.only(right: 8.w),
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              decoration: BoxDecoration(
+                color: isSelected ? category.color : category.color,
+                borderRadius: BorderRadius.circular(36.r),
+              ),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    category.icon,
+                    colorFilter: ColorFilter.mode(
+                      isSelected ? Colors.white : Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  Text(
+                    category.name,
+                    style: TextTheme.of(context).bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: isSelected ? Colors.white : Colors.white),
+                  ),
+                ],
+              ),
             ),
           );
         },
@@ -183,8 +208,9 @@ class HomeView extends StackedView<HomeViewModel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 36.h),
           Padding(
-            padding: EdgeInsets.fromLTRB(24.w, 40.h, 24.w, 16.h),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -193,7 +219,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge
-                      ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16.sp),
+                      ?.copyWith(fontWeight: FontWeight.w500, fontSize: 16.sp),
                 ),
                 TextButton.icon(
                   onPressed: () {},
@@ -202,7 +228,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyMedium
-                        ?.copyWith(color: Colors.grey.shade500),
+                        ?.copyWith(color: Colors.grey.shade600),
                   ),
                   icon: SvgPicture.asset(AppIcons.icArrowRight),
                   iconAlignment: IconAlignment.end,
@@ -215,27 +241,30 @@ class HomeView extends StackedView<HomeViewModel> {
               ],
             ),
           ),
+          SizedBox(height: 20.h),
           SizedBox(
             height: 232.h,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              itemCount: 3,
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              itemCount: viewModel.upcomingEvents.length,
               itemBuilder: (context, index) {
+                final event = viewModel.upcomingEvents[index];
+
                 return Padding(
                   padding: EdgeInsets.only(right: 16.w),
-                  child: _buildEventCard(context),
+                  child: _buildEventCard(context, event, viewModel),
                 );
               },
             ),
           ),
-          SizedBox(height: 20.h),
         ],
       ),
     );
   }
 
-  Widget _buildEventCard(BuildContext context) {
+  Widget _buildEventCard(
+      BuildContext context, Event event, HomeViewModel viewModel) {
     return Container(
       width: 232.w,
       decoration: BoxDecoration(
@@ -247,9 +276,9 @@ class HomeView extends StackedView<HomeViewModel> {
         children: [
           Container(
             height: 120.h,
-            margin: EdgeInsets.fromLTRB(12.w, 8.h, 12.w, 0),
+            margin: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 0),
             decoration: BoxDecoration(
-              color: AppColors.kcPrimaryColor.withAlpha(50),
+              color: _getCategoryColor(event.category),
               borderRadius: BorderRadius.circular(12.r),
             ),
             child: Stack(
@@ -275,7 +304,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '10',
+                          event.day,
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: AppColors.kcSportsColor,
@@ -283,7 +312,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                   ),
                         ),
                         Text(
-                          'JUNE',
+                          event.month,
                           style:
                               Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: AppColors.kcSportsColor,
@@ -304,10 +333,11 @@ class HomeView extends StackedView<HomeViewModel> {
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     child: Icon(
-                      Icons.bookmark,
-                      color: AppColors.kcSportsColor,
-                      size: 20.sp,
-                    ),
+                        event.isBookmarked
+                            ? Icons.bookmark
+                            : Icons.bookmark_border,
+                        color: const Color(0xFFF0635A),
+                        size: 20.sp),
                   ),
                 ),
               ],
@@ -321,8 +351,8 @@ class HomeView extends StackedView<HomeViewModel> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    'International Band Live in Concert',
-                    style: TextTheme.of(context).titleSmall?.copyWith(
+                    event.title,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                     maxLines: 1,
@@ -331,7 +361,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   Row(
                     children: [
                       SizedBox(
-                        width: 56.w,
+                        width: 55.w,
                         height: 26.h,
                         child: Stack(
                           children: List.generate(3, (index) {
@@ -353,24 +383,25 @@ class HomeView extends StackedView<HomeViewModel> {
                       ),
                       SizedBox(width: 4.w),
                       Text(
-                        '+10 Going',
-                        style: TextTheme.of(context).bodyMedium?.copyWith(
-                              color: AppColors.kcPrimaryColor,
-                              fontWeight: FontWeight.w500,
-                            ),
+                        viewModel.formatAttendeesCount(event.attendeesCount),
+                        style: TextStyle(
+                          color: AppColors.kcPrimaryColor,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.sp,
+                        ),
                       ),
                     ],
                   ),
                   Row(
                     children: [
-                      Icon(Icons.location_on_outlined,
+                      Icon(Icons.location_on,
                           color: Colors.grey.shade500, size: 16.sp),
                       SizedBox(width: 6.w),
                       Expanded(
                         child: Text(
-                          'Jalan Sudirman No. 52, Jakarta',
+                          event.address,
                           style: TextTheme.of(context).bodyMedium?.copyWith(
-                              color: Colors.grey.shade600, fontSize: 12.sp),
+                              color: Colors.grey.shade500, fontSize: 12.sp),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -384,6 +415,21 @@ class HomeView extends StackedView<HomeViewModel> {
         ],
       ),
     );
+  }
+
+  Color _getCategoryColor(String category) {
+    switch (category.toLowerCase()) {
+      case 'sports':
+        return AppColors.kcSportsColor.withAlpha(51);
+      case 'music':
+        return AppColors.kcMusicColor.withAlpha(51);
+      case 'food':
+        return AppColors.kcFoodColor.withAlpha(51);
+      case 'art':
+        return AppColors.kcArtColor.withAlpha(51);
+      default:
+        return AppColors.kcPrimaryColor.withAlpha(51);
+    }
   }
 
   @override

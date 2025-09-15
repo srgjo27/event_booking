@@ -18,4 +18,6 @@ class AppImages {
   static const String imgFacebookLogo = 'assets/images/img_facebook.png';
   static const String imgNotification = 'assets/images/img_notification.png';
   static const String imgFilter = 'assets/images/img_filter.png';
+  static const String imgIllustrationEmptyEvent =
+      'assets/images/illustration_empty_event.png';
 }

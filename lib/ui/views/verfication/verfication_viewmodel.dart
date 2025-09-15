@@ -47,7 +47,7 @@ class VerficationViewModel extends BaseViewModel {
   }
 
   void verifyCode() {
-    _navigationService.navigateToHomeView();
+    _navigationService.navigateToMainView();
   }
 
   @override
