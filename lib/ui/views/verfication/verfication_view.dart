@@ -19,9 +19,10 @@ class VerficationView extends StackedView<VerficationViewModel> {
     final defaultPinTheme = PinTheme(
       width: 60.w,
       height: 60.h,
-      textStyle: TextTheme.of(context)
+      textStyle: Theme.of(context)
+          .textTheme
           .titleLarge
-          ?.copyWith(fontWeight: FontWeight.w600),
+          ?.copyWith(fontWeight: FontWeight.w500),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
@@ -31,33 +32,35 @@ class VerficationView extends StackedView<VerficationViewModel> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black, size: 24.sp),
+          icon: Icon(Icons.arrow_back, size: 24.sp),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      backgroundColor: Colors.white,
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         behavior: HitTestBehavior.translucent,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(24.w, 12.h, 24.w, 0),
+          padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.h),
               Text(
                 'Verification',
-                style: TextTheme.of(context)
+                style: Theme.of(context)
+                    .textTheme
                     .headlineMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                    ?.copyWith(fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 10.h),
               Text(
                 'We\'ve send you the verification\ncode on +1 2620 0323 7631',
-                style: TextTheme.of(context).bodyLarge?.copyWith(height: 1.2.h),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(height: 1.2.h),
               ),
               SizedBox(height: 32.h),
               Center(
@@ -72,34 +75,37 @@ class VerficationView extends StackedView<VerficationViewModel> {
                   onCompleted: (pin) => viewModel.verifyCode(),
                 ),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 28.h),
               PrimaryButton(
                 text: 'CONTINUE',
                 onPressed: viewModel.verifyCode,
                 icon: Icons.arrow_forward,
-                color: AppColors.kcPrimaryColor,
+                color: AppColors.primary,
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 28.h),
               Center(
                 child: viewModel.canResend
                     ? TextButton(
                         onPressed: viewModel.resendCode,
                         child: Text(
                           'Re-send code',
-                          style: TextTheme.of(context).bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       )
                     : RichText(
                         text: TextSpan(
-                          style: TextTheme.of(context).bodyLarge,
+                          style: Theme.of(context).textTheme.bodyLarge,
                           children: [
                             const TextSpan(text: 'Re-send code in '),
                             TextSpan(
                               text:
                                   '0:${viewModel.timerDisplay.toString().padLeft(2, '0')}',
-                              style: TextTheme.of(context).bodyLarge?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.kcPrimaryColor),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.primary),
                             ),
                           ],
                         ),

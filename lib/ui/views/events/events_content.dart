@@ -1,80 +1,85 @@
 import 'package:event_booking/ui/common/app_images.dart';
+import 'package:event_booking/ui/views/events/events_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:stacked/stacked.dart';
 
-class EventsContent extends StatelessWidget {
+class EventsContent extends StackedView<EventsViewModel> {
   const EventsContent({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder(
+      BuildContext context, EventsViewModel viewModel, Widget? child) {
     return Column(
       children: [
-        Container(
-          height: 100.h,
-          color: Colors.white,
-          child: SafeArea(
-            bottom: false,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Events',
-                    style: TextTheme.of(context).titleLarge?.copyWith(
-                        fontWeight: FontWeight.w500, fontSize: 18.sp),
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.search, color: Colors.black),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.more_vert, color: Colors.black),
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+        SafeArea(
+          bottom: false,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Events',
+                  style: TextTheme.of(context)
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.w500),
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.search, color: Colors.black),
+                      onPressed: viewModel.onSearchPressed,
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.more_vert, color: Colors.black),
+                      onPressed: viewModel.onMorePressed,
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
-        // Content
         Expanded(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          AppImages.imgIllustrationEmptyEvent,
-                          width: 200.w,
-                        ),
-                        SizedBox(height: 16.h),
-                        Text(
-                          'No Upcoming Events',
-                          style: TextTheme.of(context).titleLarge?.copyWith(
-                                fontWeight: FontWeight.bold,
+                  child: viewModel.isBusy
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                AppImages.imgIllustrationEmptyEvent,
+                                width: 140.w,
                               ),
-                        ),
-                        SizedBox(height: 8.h),
-                        Text(
-                          'Stay tuned for upcoming events!',
-                          style: TextTheme.of(context).bodyLarge?.copyWith(
-                                color: Colors.grey.shade500,
+                              SizedBox(height: 16.h),
+                              Text(
+                                'No Upcoming Events',
+                                style:
+                                    TextTheme.of(context).titleLarge?.copyWith(
+                                          fontWeight: FontWeight.w500,
+                                        ),
                               ),
-                          textAlign: TextAlign.center,
+                              SizedBox(height: 8.h),
+                              Text(
+                                'Stay tuned for upcoming events!',
+                                style:
+                                    TextTheme.of(context).bodyLarge?.copyWith(
+                                          color: Colors.grey.shade500,
+                                        ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),
@@ -82,5 +87,10 @@ class EventsContent extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  @override
+  EventsViewModel viewModelBuilder(BuildContext context) {
+    return EventsViewModel()..initialise();
   }
 }

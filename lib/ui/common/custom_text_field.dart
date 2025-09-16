@@ -29,12 +29,15 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: TextStyle(
+          color: Colors.grey.shade400,
+        ),
         prefixIcon: Padding(
           padding: EdgeInsets.all(12.w),
           child: SvgPicture.asset(
             prefixIconName ?? '',
             colorFilter:
-                ColorFilter.mode(Colors.grey.shade400, BlendMode.srcIn),
+                ColorFilter.mode(Colors.grey.shade300, BlendMode.srcIn),
             width: 24.w,
           ),
         ),
@@ -42,12 +45,12 @@ class CustomTextField extends StatelessWidget {
         filled: true,
         fillColor: Colors.white,
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
+          borderRadius: BorderRadius.circular(12.r),
           borderSide: BorderSide(color: Colors.grey.shade300, width: 1.w),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15.r),
-          borderSide: BorderSide(color: AppColors.kcPrimaryColor, width: 1.w),
+          borderRadius: BorderRadius.circular(12.r),
+          borderSide: BorderSide(color: AppColors.primary, width: 1.w),
         ),
       ),
     );

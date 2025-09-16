@@ -21,9 +21,8 @@ class RegisterView extends StackedView<RegisterViewModel> {
   ) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black, size: 24.sp),
+          icon: Icon(Icons.arrow_back, size: 24.sp),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -32,7 +31,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
           behavior: HitTestBehavior.translucent,
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
-            padding: EdgeInsets.fromLTRB(24.w, 12.h, 24.w, 0),
+            padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,9 +40,9 @@ class RegisterView extends StackedView<RegisterViewModel> {
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                      ?.copyWith(fontWeight: FontWeight.w500),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 16.h),
                 CustomTextField(
                   controller: viewModel.fullNameController,
                   hintText: 'Full name',
@@ -67,12 +66,12 @@ class RegisterView extends StackedView<RegisterViewModel> {
                     icon: viewModel.isPasswordVisible
                         ? Icon(
                             Icons.visibility_outlined,
-                            color: Colors.grey.shade400,
+                            color: Colors.grey.shade300,
                           )
                         : SvgPicture.asset(
                             AppIcons.icHidden,
                             colorFilter: ColorFilter.mode(
-                                Colors.grey.shade400, BlendMode.srcIn),
+                                Colors.grey.shade300, BlendMode.srcIn),
                             width: 24.w,
                           ),
                     onPressed: viewModel.togglePasswordVisibility,
@@ -88,30 +87,31 @@ class RegisterView extends StackedView<RegisterViewModel> {
                     icon: viewModel.isPasswordVisible
                         ? Icon(
                             Icons.visibility_outlined,
-                            color: Colors.grey.shade400,
+                            color: Colors.grey.shade300,
                           )
                         : SvgPicture.asset(
                             AppIcons.icHidden,
                             colorFilter: ColorFilter.mode(
-                                Colors.grey.shade400, BlendMode.srcIn),
+                                Colors.grey.shade300, BlendMode.srcIn),
                             width: 24.w,
                           ),
                     onPressed: viewModel.togglePasswordVisibility,
                   ),
                 ),
-                SizedBox(height: 20.h),
+                SizedBox(height: 16.h),
                 PrimaryButton(
                   text: 'SIGN UP',
                   onPressed: viewModel.signUp,
-                  color: AppColors.kcPrimaryColor,
+                  color: AppColors.primary,
                   icon: Icons.arrow_forward,
                 ),
                 SizedBox(height: 24.h),
                 Center(
                   child: Text('OR',
-                      style: TextTheme.of(context)
+                      style: Theme.of(context)
+                          .textTheme
                           .bodyMedium
-                          ?.copyWith(color: AppColors.kcLightGrey)),
+                          ?.copyWith(fontWeight: FontWeight.w500)),
                 ),
                 SizedBox(height: 16.h),
                 _buildSocialLoginButton(
@@ -147,7 +147,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 12.h),
           backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
+          foregroundColor: AppColors.text,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.r),
@@ -166,7 +166,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
       children: [
         Text(
           "Already have an account?",
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         TextButton(
           onPressed: viewModel.navigateToSignIn,
@@ -175,7 +175,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
-                ?.copyWith(color: AppColors.kcPrimaryColor),
+                ?.copyWith(color: AppColors.primary),
           ),
         ),
       ],

@@ -1,9 +1,13 @@
+import 'package:event_booking/app/app.locator.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
-import 'package:event_booking/ui/common/models.dart';
+import 'package:event_booking/models/models.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
+  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
 
@@ -22,11 +26,11 @@ class HomeViewModel extends BaseViewModel {
 
   final List<Category> categories = [
     Category(
-        name: 'Sports', icon: AppIcons.icSport, color: AppColors.kcSportsColor),
+        name: 'Sports', icon: AppIcons.icSport, color: AppColors.vibrantRed),
     Category(
-        name: 'Music', icon: AppIcons.icMusic, color: AppColors.kcMusicColor),
-    Category(name: 'Food', icon: AppIcons.icFood, color: AppColors.kcFoodColor),
-    Category(name: 'Art', icon: AppIcons.icArt, color: AppColors.kcArtColor),
+        name: 'Music', icon: AppIcons.icMusic, color: AppColors.softOrange),
+    Category(name: 'Food', icon: AppIcons.icFood, color: AppColors.mintGreen),
+    Category(name: 'Art', icon: AppIcons.icArt, color: AppColors.skyBlue),
   ];
 
   final List<Event> events = [

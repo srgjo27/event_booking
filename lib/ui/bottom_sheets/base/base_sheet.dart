@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'notice_sheet_model.dart';
+import 'base_sheet_model.dart';
 
-class NoticeSheet extends StackedView<NoticeSheetModel> {
-  final Function(SheetResponse)? completer;
+class BaseSheet extends StackedView<BaseSheetModel> {
+  final Function(SheetResponse response)? completer;
   final SheetRequest request;
-  const NoticeSheet({Key? key, required this.completer, required this.request})
-      : super(key: key);
+  const BaseSheet({
+    Key? key,
+    required this.completer,
+    required this.request,
+  }) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    NoticeSheetModel viewModel,
+    BaseSheetModel viewModel,
     Widget? child,
   ) {
     return Container(
@@ -32,16 +34,18 @@ class NoticeSheet extends StackedView<NoticeSheetModel> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            request.title!,
+            request.title ?? 'Hello Stacked Sheet!!',
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
           ),
-          verticalSpaceTiny,
-          Text(
-            request.description!,
-            style: const TextStyle(fontSize: 14, color: AppColors.kcMediumGrey),
-            maxLines: 3,
-            softWrap: true,
-          ),
+          if (request.description != null) ...[
+            verticalSpaceTiny,
+            Text(
+              request.description!,
+              style: TextStyle(fontSize: 14, color: Colors.grey[400]),
+              maxLines: 3,
+              softWrap: true,
+            ),
+          ],
           verticalSpaceLarge,
         ],
       ),
@@ -49,5 +53,5 @@ class NoticeSheet extends StackedView<NoticeSheetModel> {
   }
 
   @override
-  NoticeSheetModel viewModelBuilder(BuildContext context) => NoticeSheetModel();
+  BaseSheetModel viewModelBuilder(BuildContext context) => BaseSheetModel();
 }

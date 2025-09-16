@@ -2,7 +2,7 @@ import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
 import 'package:event_booking/ui/common/bottom_nav_bar.dart';
 import 'package:event_booking/ui/views/events/events_content.dart';
-import 'package:event_booking/ui/views/home/home_content.dart';
+import 'package:event_booking/ui/views/home/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
@@ -21,7 +21,7 @@ class MainView extends StackedView<MainViewModel> {
         controller: viewModel.pageController,
         onPageChanged: viewModel.onPageChanged,
         children: const [
-          HomeContent(),
+          HomeView(),
           EventsContent(),
           Center(child: Text('Map View')),
           Center(child: Text('Profile View')),
@@ -33,7 +33,7 @@ class MainView extends StackedView<MainViewModel> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        backgroundColor: AppColors.kcPrimaryColor,
+        backgroundColor: AppColors.primary,
         shape: const CircleBorder(),
         elevation: 0,
         child: SvgPicture.asset(AppIcons.icAddBox),

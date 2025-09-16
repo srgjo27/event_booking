@@ -29,7 +29,7 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(
-                        top: 40.h, left: 16.w, right: 16.w, bottom: 20.h),
+                        top: 20.h, left: 16.w, right: 16.w, bottom: 12.h),
                     child: Image.asset(
                       viewModel.contents[index].image,
                       fit: BoxFit.contain,
@@ -44,7 +44,7 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
               flex: 2,
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.kcPrimaryColor,
+                  color: AppColors.primary,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(50.r),
                     topRight: Radius.circular(50.r),
@@ -61,18 +61,23 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
                           Text(
                             viewModel.contents[viewModel.currentPage].title,
                             textAlign: TextAlign.center,
-                            style:
-                                TextTheme.of(context).headlineMedium?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
                           ),
                           SizedBox(height: 20.h),
                           Text(
                             viewModel
                                 .contents[viewModel.currentPage].description,
                             textAlign: TextAlign.center,
-                            style: TextTheme.of(context).titleMedium?.copyWith(
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
                                   color: Colors.white.withAlpha(179),
                                 ),
                           ),

@@ -21,14 +21,13 @@ class LoginView extends StackedView<LoginViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 28.h),
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -45,7 +44,7 @@ class LoginView extends StackedView<LoginViewModel> {
                     style: Theme.of(context)
                         .textTheme
                         .headlineMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                        ?.copyWith(fontWeight: FontWeight.w500),
                   ),
                   SizedBox(height: 20.h),
                   CustomTextField(
@@ -64,12 +63,12 @@ class LoginView extends StackedView<LoginViewModel> {
                       icon: viewModel.isPasswordVisible
                           ? Icon(
                               Icons.visibility_outlined,
-                              color: Colors.grey.shade400,
+                              color: Colors.grey.shade300,
                             )
                           : SvgPicture.asset(
                               AppIcons.icHidden,
                               colorFilter: ColorFilter.mode(
-                                  Colors.grey.shade400, BlendMode.srcIn),
+                                  Colors.grey.shade300, BlendMode.srcIn),
                               width: 24.w,
                             ),
                       onPressed: viewModel.togglePasswordVisibility,
@@ -89,15 +88,14 @@ class LoginView extends StackedView<LoginViewModel> {
                             ),
                           ),
                           Text('Remember Me',
-                              style:
-                                  TextTheme.of(context).bodyMedium?.copyWith()),
+                              style: Theme.of(context).textTheme.bodyMedium),
                         ],
                       ),
                       TextButton(
                         onPressed: () {},
                         child: Text(
                           'Forgot Password?',
-                          style: TextTheme.of(context).bodyMedium?.copyWith(),
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                     ],
@@ -106,15 +104,16 @@ class LoginView extends StackedView<LoginViewModel> {
                   PrimaryButton(
                     text: 'SIGN IN',
                     onPressed: viewModel.signIn,
-                    color: AppColors.kcPrimaryColor,
+                    color: AppColors.primary,
                     icon: Icons.arrow_forward,
                   ),
                   SizedBox(height: 24.h),
                   Center(
                     child: Text('OR',
-                        style: TextTheme.of(context)
+                        style: Theme.of(context)
+                            .textTheme
                             .bodyMedium
-                            ?.copyWith(color: AppColors.kcLightGrey)),
+                            ?.copyWith(fontWeight: FontWeight.w500)),
                   ),
                   SizedBox(height: 16.h),
                   _buildSocialLoginButton(
@@ -151,14 +150,14 @@ class LoginView extends StackedView<LoginViewModel> {
         style: ElevatedButton.styleFrom(
           padding: EdgeInsets.symmetric(vertical: 12.h),
           backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
+          foregroundColor: AppColors.text,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.r),
+            borderRadius: BorderRadius.circular(12.r),
             side: BorderSide(color: Colors.grey.shade300),
           ),
         ),
-        icon: Image.asset(iconPath, width: 24.w),
+        icon: Image.asset(iconPath),
         label: Text(label, style: TextStyle(fontSize: 14.sp)),
       ),
     );
@@ -170,7 +169,7 @@ class LoginView extends StackedView<LoginViewModel> {
       children: [
         Text(
           "Don't have an account?",
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         TextButton(
           onPressed: viewModel.navigateToSignUp,
@@ -179,7 +178,7 @@ class LoginView extends StackedView<LoginViewModel> {
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
-                ?.copyWith(color: AppColors.kcPrimaryColor),
+                ?.copyWith(color: AppColors.primary),
           ),
         ),
       ],

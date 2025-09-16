@@ -30,10 +30,28 @@ class MainApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             brightness: Brightness.light,
-            scaffoldBackgroundColor: Colors.white,
+            scaffoldBackgroundColor: AppColors.background,
             colorScheme: ColorScheme.fromSeed(
-              seedColor: AppColors.kcPrimaryColor,
+              seedColor: AppColors.primary,
+              primary: AppColors.primary,
+              secondary: AppColors.accent,
+              surface: AppColors.background,
               brightness: Brightness.light,
+            ),
+            textTheme: Theme.of(context).textTheme.apply(
+                  bodyColor: AppColors.text,
+                  displayColor: AppColors.text,
+                ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              foregroundColor: AppColors.text,
+              elevation: 0,
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+              ),
             ),
           ),
           initialRoute: Routes.startupView,

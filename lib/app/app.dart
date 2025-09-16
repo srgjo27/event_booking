@@ -1,4 +1,3 @@
-import 'package:event_booking/ui/bottom_sheets/notice/notice_sheet.dart';
 import 'package:event_booking/ui/dialogs/info_alert/info_alert_dialog.dart';
 import 'package:event_booking/ui/views/main/main_view.dart';
 import 'package:event_booking/ui/views/startup/startup_view.dart';
@@ -8,6 +7,7 @@ import 'package:event_booking/ui/views/onboarding/onboarding_view.dart';
 import 'package:event_booking/ui/views/login/login_view.dart';
 import 'package:event_booking/ui/views/register/register_view.dart';
 import 'package:event_booking/ui/views/verfication/verfication_view.dart';
+import 'package:event_booking/ui/bottom_sheets/base/base_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -27,8 +27,8 @@ import 'package:event_booking/ui/views/verfication/verfication_view.dart';
     // @stacked-service
   ],
   bottomsheets: [
-    StackedBottomsheet(classType: NoticeSheet),
-    // @stacked-bottom-sheet
+    StackedBottomsheet(classType: BaseSheet),
+// @stacked-bottom-sheet
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),

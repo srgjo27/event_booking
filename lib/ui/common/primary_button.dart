@@ -18,7 +18,7 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonColor = color ?? AppColors.kcVeryLightGrey;
+    final buttonColor = color ?? AppColors.accent;
     final isEnabled = onPressed != null;
 
     return SizedBox(
@@ -26,16 +26,15 @@ class PrimaryButton extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
-          color: isEnabled ? buttonColor : AppColors.kcLightGrey,
+          color: isEnabled ? buttonColor : AppColors.accent.withAlpha(100),
         ),
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 12.h),
-            backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(36.r),
+              borderRadius: BorderRadius.circular(12.r),
             ),
           ),
           child: Stack(
@@ -47,20 +46,20 @@ class PrimaryButton extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: Colors.white,
                         fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.w500,
                       ),
                 ),
               ),
               if (icon != null)
                 Positioned(
-                  right: 20.w,
+                  right: 24.w,
                   child: Container(
                     padding: EdgeInsets.all(4.w),
                     decoration: const BoxDecoration(
                       color: Colors.white24,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(icon, color: Colors.white, size: 16.sp),
+                    child: Icon(icon),
                   ),
                 ),
             ],
