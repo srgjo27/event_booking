@@ -1,12 +1,13 @@
-import 'package:event_booking/app/app.locator.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
 import 'package:event_booking/models/models.dart';
+import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  // final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+
+  final searchController = TextEditingController();
 
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
@@ -26,9 +27,9 @@ class HomeViewModel extends BaseViewModel {
 
   final List<Category> categories = [
     Category(
-        name: 'Sports', icon: AppIcons.icSport, color: AppColors.vibrantRed),
+        name: 'Sports', icon: AppIcons.icSport, color: AppColors.terracotta),
     Category(
-        name: 'Music', icon: AppIcons.icMusic, color: AppColors.softOrange),
+        name: 'Music', icon: AppIcons.icMusic, color: AppColors.vibrantRed),
     Category(name: 'Food', icon: AppIcons.icFood, color: AppColors.mintGreen),
     Category(name: 'Art', icon: AppIcons.icArt, color: AppColors.skyBlue),
   ];
@@ -171,5 +172,11 @@ class HomeViewModel extends BaseViewModel {
       return '${(count / 1000).toStringAsFixed(0)}K+ Going';
     }
     return '$count Going';
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 }

@@ -32,15 +32,17 @@ class CustomTextField extends StatelessWidget {
         hintStyle: TextStyle(
           color: Colors.grey.shade400,
         ),
-        prefixIcon: Padding(
-          padding: EdgeInsets.all(12.w),
-          child: SvgPicture.asset(
-            prefixIconName ?? '',
-            colorFilter:
-                ColorFilter.mode(Colors.grey.shade300, BlendMode.srcIn),
-            width: 24.w,
-          ),
-        ),
+        prefixIcon: prefixIconName != null
+            ? Padding(
+                padding: EdgeInsets.all(12.w),
+                child: SvgPicture.asset(
+                  prefixIconName!,
+                  colorFilter:
+                      ColorFilter.mode(Colors.grey.shade300, BlendMode.srcIn),
+                  width: 24.w,
+                ),
+              )
+            : null,
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: Colors.white,
