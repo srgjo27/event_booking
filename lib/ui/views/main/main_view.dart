@@ -1,8 +1,9 @@
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
 import 'package:event_booking/ui/common/bottom_nav_bar.dart';
-import 'package:event_booking/ui/views/events/events_content.dart';
+import 'package:event_booking/ui/views/events/events_view.dart';
 import 'package:event_booking/ui/views/home/home_view.dart';
+import 'package:event_booking/ui/views/map/map_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
@@ -21,8 +22,8 @@ class MainView extends StackedView<MainViewModel> {
         onPageChanged: viewModel.onPageChanged,
         children: const [
           HomeView(),
-          EventsContent(),
-          Center(child: Text('Map View')),
+          EventsView(),
+          MapView(),
           Center(child: Text('Profile View')),
         ],
       ),

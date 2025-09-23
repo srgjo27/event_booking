@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: TextStyle(
-          color: Colors.grey.shade400,
+          color: Colors.grey.shade500,
         ),
         prefixIcon: prefixIconName != null
             ? Padding(
@@ -39,7 +39,7 @@ class CustomTextField extends StatelessWidget {
                 child: SvgPicture.asset(
                   prefixIconName!,
                   colorFilter:
-                      ColorFilter.mode(Colors.grey.shade300, BlendMode.srcIn),
+                      ColorFilter.mode(Colors.grey.shade400, BlendMode.srcIn),
                   width: 24.w,
                 ),
               )

@@ -1,3 +1,15 @@
-const String ksHomeBottomSheetTitle = 'Build Great Apps!';
-const String ksHomeBottomSheetDescription =
-    'Stacked is built to help you build better apps. Give us a chance and we\'ll prove it to you. Check out stacked.filledstacks.com to learn more';
+class CategoryConstants {
+  CategoryConstants._();
+
+  static const String sports = 'sports';
+  static const String music = 'music';
+  static const String food = 'food';
+  static const String art = 'art';
+
+  static const List<String> allCategories = [
+    sports,
+    music,
+    food,
+    art,
+  ];
+}

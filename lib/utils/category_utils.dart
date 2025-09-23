@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
+import 'package:event_booking/ui/common/app_strings.dart';
 
 /// Utility class for category-related helper functions
 class CategoryUtils {
@@ -12,13 +13,13 @@ class CategoryUtils {
   /// Returns a color with reduced opacity for better visual appearance
   static Color getCategoryColor(String category) {
     switch (category.toLowerCase()) {
-      case 'sports':
+      case CategoryConstants.sports:
         return AppColors.terracotta.withAlpha(51);
-      case 'music':
+      case CategoryConstants.music:
         return AppColors.vibrantRed.withAlpha(51);
-      case 'food':
+      case CategoryConstants.food:
         return AppColors.mintGreen.withAlpha(51);
-      case 'art':
+      case CategoryConstants.art:
         return AppColors.skyBlue.withAlpha(51);
       default:
         return AppColors.primary.withAlpha(51);
