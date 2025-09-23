@@ -14,10 +14,9 @@ class HomeView extends StackedView<HomeViewModel> {
     HomeViewModel viewModel,
     Widget? child,
   ) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      behavior: HitTestBehavior.translucent,
-      child: Stack(
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Stack(
         children: [
           Column(
             children: [

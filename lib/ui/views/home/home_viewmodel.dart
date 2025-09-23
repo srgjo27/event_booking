@@ -1,13 +1,21 @@
+import 'package:event_booking/app/app.locator.dart';
+import 'package:event_booking/app/app.bottomsheets.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
 import 'package:event_booking/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
-  // final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
 
   final searchController = TextEditingController();
+  late final FocusNode searchFocusNode;
+
+  HomeViewModel() {
+    searchFocusNode = FocusNode();
+  }
 
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
@@ -174,9 +182,21 @@ class HomeViewModel extends BaseViewModel {
     return '$count Going';
   }
 
+  Future<void> showFilterOptions() async {
+    await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.base,
+      isScrollControlled: true,
+      title: 'Filter Options',
+      description: 'Select your filter options below',
+      mainButtonTitle: 'Ok',
+      secondaryButtonTitle: 'Cancel',
+    );
+  }
+
   @override
   void dispose() {
     searchController.dispose();
+    searchFocusNode.dispose();
     super.dispose();
   }
 }

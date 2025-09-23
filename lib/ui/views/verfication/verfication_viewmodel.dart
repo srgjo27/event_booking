@@ -8,7 +8,6 @@ import 'package:stacked_services/stacked_services.dart';
 class VerficationViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final pinController = TextEditingController();
-  final focusNode = FocusNode();
 
   Timer? _timer;
   int _start = 30;
@@ -18,7 +17,6 @@ class VerficationViewModel extends BaseViewModel {
 
   void initialise() {
     startTimer();
-    focusNode.requestFocus();
   }
 
   void startTimer() {
@@ -54,7 +52,6 @@ class VerficationViewModel extends BaseViewModel {
   void dispose() {
     _timer?.cancel();
     pinController.dispose();
-    focusNode.dispose();
     super.dispose();
   }
 }

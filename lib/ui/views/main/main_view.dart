@@ -15,7 +15,6 @@ class MainView extends StackedView<MainViewModel> {
   @override
   Widget builder(BuildContext context, MainViewModel viewModel, Widget? child) {
     return Scaffold(
-      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       body: PageView(
         controller: viewModel.pageController,

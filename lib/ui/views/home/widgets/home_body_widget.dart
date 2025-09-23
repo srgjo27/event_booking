@@ -5,7 +5,6 @@ import 'package:event_booking/ui/common/app_icons.dart';
 import 'home_event_card_widget.dart';
 import '../home_viewmodel.dart';
 
-/// Body widget containing the main content of the home view
 class HomeBodyWidget extends StatelessWidget {
   final HomeViewModel viewModel;
 

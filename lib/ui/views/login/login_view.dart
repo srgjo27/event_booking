@@ -22,115 +22,111 @@ class LoginView extends StackedView<LoginViewModel> {
   ) {
     return Scaffold(
       body: SafeArea(
-        child: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Image.asset(
-                      AppImages.imgEventHubVertical,
-                      width: 132.w,
-                      fit: BoxFit.contain,
-                    ),
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Image.asset(
+                    AppImages.imgEventHubVertical,
+                    width: 132.w,
+                    fit: BoxFit.contain,
                   ),
-                  SizedBox(height: 32.h),
-                  Text(
-                    'Sign in',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium
-                        ?.copyWith(fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 20.h),
-                  CustomTextField(
-                    controller: viewModel.emailController,
-                    hintText: 'yourmail@example.com',
-                    keyboardType: TextInputType.emailAddress,
-                    prefixIconName: AppIcons.icMessage,
-                  ),
-                  SizedBox(height: 16.h),
-                  CustomTextField(
-                    controller: viewModel.passwordController,
-                    obscureText: !viewModel.isPasswordVisible,
-                    hintText: 'Your password',
-                    prefixIconName: AppIcons.icLock,
-                    suffixIcon: IconButton(
-                      icon: viewModel.isPasswordVisible
-                          ? Icon(
-                              Icons.visibility_outlined,
-                              color: Colors.grey.shade300,
-                            )
-                          : SvgPicture.asset(
-                              AppIcons.icHidden,
-                              colorFilter: ColorFilter.mode(
-                                  Colors.grey.shade300, BlendMode.srcIn),
-                              width: 24.w,
-                            ),
-                      onPressed: viewModel.togglePasswordVisibility,
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Transform.scale(
-                            scale: 0.6.w,
-                            child: CustomSwitch(
-                              value: viewModel.rememberMe,
-                              onChanged: viewModel.setRememberMe,
-                            ),
+                ),
+                SizedBox(height: 32.h),
+                Text(
+                  'Sign in',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium
+                      ?.copyWith(fontWeight: FontWeight.w500),
+                ),
+                SizedBox(height: 20.h),
+                CustomTextField(
+                  controller: viewModel.emailController,
+                  hintText: 'yourmail@example.com',
+                  keyboardType: TextInputType.emailAddress,
+                  prefixIconName: AppIcons.icMessage,
+                ),
+                SizedBox(height: 16.h),
+                CustomTextField(
+                  controller: viewModel.passwordController,
+                  obscureText: !viewModel.isPasswordVisible,
+                  hintText: 'Your password',
+                  prefixIconName: AppIcons.icLock,
+                  suffixIcon: IconButton(
+                    icon: viewModel.isPasswordVisible
+                        ? Icon(
+                            Icons.visibility_outlined,
+                            color: Colors.grey.shade300,
+                          )
+                        : SvgPicture.asset(
+                            AppIcons.icHidden,
+                            colorFilter: ColorFilter.mode(
+                                Colors.grey.shade300, BlendMode.srcIn),
+                            width: 24.w,
                           ),
-                          Text('Remember Me',
-                              style: Theme.of(context).textTheme.bodyMedium),
-                        ],
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Forgot Password?',
-                          style: Theme.of(context).textTheme.bodyMedium,
+                    onPressed: viewModel.togglePasswordVisibility,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Transform.scale(
+                          scale: 0.6.w,
+                          child: CustomSwitch(
+                            value: viewModel.rememberMe,
+                            onChanged: viewModel.setRememberMe,
+                          ),
                         ),
+                        Text('Remember Me',
+                            style: Theme.of(context).textTheme.bodyMedium),
+                      ],
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Forgot Password?',
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 20.h),
-                  PrimaryButton(
-                    text: 'SIGN IN',
-                    onPressed: viewModel.signIn,
-                    color: AppColors.primary,
-                    icon: Icons.arrow_forward,
-                  ),
-                  SizedBox(height: 24.h),
-                  Center(
-                    child: Text('OR',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(fontWeight: FontWeight.w500)),
-                  ),
-                  SizedBox(height: 16.h),
-                  _buildSocialLoginButton(
-                    onPressed: viewModel.loginWithGoogle,
-                    iconPath: AppImages.imgGoogleLogo,
-                    label: 'Login with Google',
-                  ),
-                  SizedBox(height: 12.h),
-                  _buildSocialLoginButton(
-                    onPressed: viewModel.loginWithFacebook,
-                    iconPath: AppImages.imgFacebookLogo,
-                    label: 'Login with Facebook',
-                  ),
-                  SizedBox(height: 16.h),
-                  _buildSignUpText(context, viewModel),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20.h),
+                PrimaryButton(
+                  text: 'SIGN IN',
+                  onPressed: viewModel.signIn,
+                  color: AppColors.primary,
+                  icon: Icons.arrow_forward,
+                ),
+                SizedBox(height: 24.h),
+                Center(
+                  child: Text('OR',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.w500)),
+                ),
+                SizedBox(height: 16.h),
+                _buildSocialLoginButton(
+                  onPressed: viewModel.loginWithGoogle,
+                  iconPath: AppImages.imgGoogleLogo,
+                  label: 'Login with Google',
+                ),
+                SizedBox(height: 12.h),
+                _buildSocialLoginButton(
+                  onPressed: viewModel.loginWithFacebook,
+                  iconPath: AppImages.imgFacebookLogo,
+                  label: 'Login with Facebook',
+                ),
+                SizedBox(height: 16.h),
+                _buildSignUpText(context, viewModel),
+              ],
             ),
           ),
         ),

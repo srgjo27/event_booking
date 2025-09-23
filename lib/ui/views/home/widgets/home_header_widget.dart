@@ -98,6 +98,11 @@ class HomeHeaderWidget extends StatelessWidget {
       children: [
         Expanded(
           child: TextField(
+            controller: viewModel.searchController,
+            focusNode: viewModel.searchFocusNode,
+            onTapOutside: (event) {
+              viewModel.searchFocusNode.unfocus();
+            },
             decoration: InputDecoration(
               hintText: 'Search',
               hintStyle: const TextStyle(color: Colors.white),
@@ -122,8 +127,10 @@ class HomeHeaderWidget extends StatelessWidget {
         ),
         SizedBox(width: 8.w),
         ElevatedButton.icon(
-          onPressed: () {},
-          icon: Icon(Icons.filter_list, size: 20.w),
+          onPressed: () async {
+            viewModel.showFilterOptions();
+          },
+          icon: Icon(Icons.filter_list, size: 24.w),
           label: Text(
             'Filters',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(

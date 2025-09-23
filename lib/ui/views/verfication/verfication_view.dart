@@ -38,81 +38,77 @@ class VerficationView extends StackedView<VerficationViewModel> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        behavior: HitTestBehavior.translucent,
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 20.h),
-              Text(
-                'Verification',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium
-                    ?.copyWith(fontWeight: FontWeight.w600),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 20.h),
+            Text(
+              'Verification',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(fontWeight: FontWeight.w600),
+            ),
+            SizedBox(height: 10.h),
+            Text(
+              'We\'ve send you the verification\ncode on +1 2620 0323 7631',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(height: 1.2.h),
+            ),
+            SizedBox(height: 32.h),
+            Center(
+              child: Pinput(
+                length: 4,
+                controller: viewModel.pinController,
+                onTapOutside: (event) => FocusScope.of(context).unfocus(),
+                defaultPinTheme: defaultPinTheme,
+                separatorBuilder: (index) => SizedBox(width: 16.w),
+                showCursor: true,
+                keyboardType: TextInputType.number,
+                onCompleted: (pin) => viewModel.verifyCode(),
               ),
-              SizedBox(height: 10.h),
-              Text(
-                'We\'ve send you the verification\ncode on +1 2620 0323 7631',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(height: 1.2.h),
-              ),
-              SizedBox(height: 32.h),
-              Center(
-                child: Pinput(
-                  length: 4,
-                  controller: viewModel.pinController,
-                  focusNode: viewModel.focusNode,
-                  defaultPinTheme: defaultPinTheme,
-                  separatorBuilder: (index) => SizedBox(width: 16.w),
-                  showCursor: true,
-                  keyboardType: TextInputType.number,
-                  onCompleted: (pin) => viewModel.verifyCode(),
-                ),
-              ),
-              SizedBox(height: 28.h),
-              PrimaryButton(
-                text: 'CONTINUE',
-                onPressed: viewModel.verifyCode,
-                icon: Icons.arrow_forward,
-                color: AppColors.primary,
-              ),
-              SizedBox(height: 28.h),
-              Center(
-                child: viewModel.canResend
-                    ? TextButton(
-                        onPressed: viewModel.resendCode,
-                        child: Text(
-                          'Re-send code',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      )
-                    : RichText(
-                        text: TextSpan(
-                          style: Theme.of(context).textTheme.bodyLarge,
-                          children: [
-                            const TextSpan(text: 'Re-send code in '),
-                            TextSpan(
-                              text:
-                                  '0:${viewModel.timerDisplay.toString().padLeft(2, '0')}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyLarge
-                                  ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.primary),
-                            ),
-                          ],
-                        ),
+            ),
+            SizedBox(height: 28.h),
+            PrimaryButton(
+              text: 'CONTINUE',
+              onPressed: viewModel.verifyCode,
+              icon: Icons.arrow_forward,
+              color: AppColors.primary,
+            ),
+            SizedBox(height: 28.h),
+            Center(
+              child: viewModel.canResend
+                  ? TextButton(
+                      onPressed: viewModel.resendCode,
+                      child: Text(
+                        'Re-send code',
+                        style: Theme.of(context).textTheme.bodyLarge,
                       ),
-              ),
-            ],
-          ),
+                    )
+                  : RichText(
+                      text: TextSpan(
+                        style: Theme.of(context).textTheme.bodyLarge,
+                        children: [
+                          const TextSpan(text: 'Re-send code in '),
+                          TextSpan(
+                            text:
+                                '0:${viewModel.timerDisplay.toString().padLeft(2, '0')}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.primary),
+                          ),
+                        ],
+                      ),
+                    ),
+            ),
+          ],
         ),
       ),
     );
