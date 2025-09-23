@@ -6,11 +6,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:event_booking/utils/map_config.dart';
 
 class MapViewmodel extends BaseViewModel {
-  // Flutter Map Controller
   final MapController _mapController = MapController();
   MapController get mapController => _mapController;
 
-  // Map state
   List<Marker> _markers = [];
   SelectedEvent? _selectedEvent;
   final LatLng _currentLocation = MapConfig.defaultLocation;
@@ -18,7 +16,6 @@ class MapViewmodel extends BaseViewModel {
   String _searchQuery = '';
   double _currentZoom = MapConfig.defaultZoom;
 
-  // Getters
   List<Marker> get markers => _markers;
   SelectedEvent? get selectedEvent => _selectedEvent;
   LatLng get currentLocation => _currentLocation;
@@ -26,13 +23,11 @@ class MapViewmodel extends BaseViewModel {
   String get searchQuery => _searchQuery;
   double get currentZoom => _currentZoom;
 
-  /// Initialize the map view
   void initialise() {
     _loadEventMarkers();
     notifyListeners();
   }
 
-  /// Load event markers from sample data
   void _loadEventMarkers() {
     _markers = MapConfig.sampleEventLocations.map((eventData) {
       return Marker(
@@ -65,19 +60,17 @@ class MapViewmodel extends BaseViewModel {
     }).toList();
   }
 
-  /// Handle marker tap
   void _onMarkerTapped(Map<String, dynamic> eventData) {
     _selectedEvent = SelectedEvent(
       title: eventData['title'],
       location: eventData['location'],
-      date: 'Oct 25, 2024', // Sample date
+      date: 'Oct 25, 2024',
       description: 'Join us for an amazing ${eventData['category']} event!',
       imageUrl: '',
     );
     notifyListeners();
   }
 
-  // Event handlers
   void onSearchChanged(String query) {
     _searchQuery = query;
     _filterMarkers();
@@ -132,7 +125,6 @@ class MapViewmodel extends BaseViewModel {
     notifyListeners();
   }
 
-  /// Filter markers based on search query
   void _filterMarkers() {
     if (_searchQuery.isEmpty) {
       _loadEventMarkers();
@@ -182,7 +174,6 @@ class MapViewmodel extends BaseViewModel {
     }).toList();
   }
 
-  /// Move camera to specific location
   void moveToLocation(LatLng location) {
     _mapController.move(location, _currentZoom);
   }
