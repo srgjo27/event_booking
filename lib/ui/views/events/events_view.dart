@@ -11,7 +11,7 @@ class EventsView extends StackedView<EventsViewModel> {
   Widget builder(
       BuildContext context, EventsViewModel viewModel, Widget? child) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Column(
         children: [
           SafeArea(
@@ -27,17 +27,9 @@ class EventsView extends StackedView<EventsViewModel> {
                         .titleLarge
                         ?.copyWith(fontWeight: FontWeight.w500),
                   ),
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.search, color: Colors.black),
-                        onPressed: viewModel.onSearchPressed,
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.more_vert, color: Colors.black),
-                        onPressed: viewModel.onMorePressed,
-                      ),
-                    ],
+                  IconButton(
+                    icon: const Icon(Icons.more_vert, color: Colors.black),
+                    onPressed: viewModel.onMorePressed,
                   ),
                 ],
               ),
@@ -58,15 +50,18 @@ class EventsView extends StackedView<EventsViewModel> {
               dividerColor: Colors.transparent,
               labelColor: Colors.white,
               unselectedLabelColor: Colors.grey.shade600,
-              labelStyle: Theme.of(context).textTheme.titleMedium,
-              unselectedLabelStyle: Theme.of(context).textTheme.titleMedium,
+              labelStyle: Theme.of(context).textTheme.titleSmall,
+              unselectedLabelStyle: Theme.of(context).textTheme.titleSmall,
               splashFactory: NoSplash.splashFactory,
               tabs: const [
+                Tab(
+                  child: Text('NOW'),
+                ),
                 Tab(
                   child: Text('UPCOMING'),
                 ),
                 Tab(
-                  child: Text('PAST EVENTS'),
+                  child: Text('PAST'),
                 ),
               ],
             ),
@@ -92,8 +87,9 @@ class EventsView extends StackedView<EventsViewModel> {
               child: TabBarView(
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  _buildEventsList(context, viewModel, isUpcoming: true),
-                  _buildEventsList(context, viewModel, isUpcoming: false),
+                  _buildEventsList(context, viewModel, status: 'now'),
+                  _buildEventsList(context, viewModel, status: 'upcoming'),
+                  _buildEventsList(context, viewModel, status: 'past'),
                 ],
               ),
             ),
@@ -104,7 +100,7 @@ class EventsView extends StackedView<EventsViewModel> {
   }
 
   Widget _buildEventsList(BuildContext context, EventsViewModel viewModel,
-      {required bool isUpcoming}) {
+      {required String status}) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
@@ -125,7 +121,11 @@ class EventsView extends StackedView<EventsViewModel> {
                         ),
                         SizedBox(height: 16.h),
                         Text(
-                          isUpcoming ? 'No Upcoming Events' : 'No Past Events',
+                          status == 'now'
+                              ? 'No Now Events'
+                              : status == 'upcoming'
+                                  ? 'No Upcoming Events'
+                                  : 'No Past Events',
                           style:
                               Theme.of(context).textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.w500,
@@ -133,9 +133,11 @@ class EventsView extends StackedView<EventsViewModel> {
                         ),
                         SizedBox(height: 8.h),
                         Text(
-                          isUpcoming
+                          status == 'now'
                               ? 'Stay tuned for upcoming events!'
-                              : 'You haven\'t attended any events yet.',
+                              : status == 'upcoming'
+                                  ? 'You have no upcoming events.'
+                                  : 'You haven\'t attended any events yet.',
                           style:
                               Theme.of(context).textTheme.bodyMedium?.copyWith(
                                     color: Colors.grey.shade500,

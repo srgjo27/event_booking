@@ -59,14 +59,14 @@ class CustomBottomNavBar extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: isSelected ? AppColors.primary : AppColors.accent,
+              color: isSelected ? AppColors.primary : Colors.grey.shade400,
               size: 22.sp,
             ),
             SizedBox(height: 2.h),
             Text(
               label,
               style: TextStyle(
-                color: isSelected ? AppColors.primary : AppColors.accent,
+                color: isSelected ? AppColors.primary : Colors.grey.shade400,
                 fontSize: 10.sp,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
               ),

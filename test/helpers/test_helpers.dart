@@ -2,6 +2,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:event_booking/app/app.locator.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:event_booking/services/stripe_service.dart';
 // @stacked-import
 
 import 'test_helpers.mocks.dart';
@@ -12,14 +13,16 @@ import 'test_helpers.mocks.dart';
     MockSpec<NavigationService>(onMissingStub: OnMissingStub.returnDefault),
     MockSpec<BottomSheetService>(onMissingStub: OnMissingStub.returnDefault),
     MockSpec<DialogService>(onMissingStub: OnMissingStub.returnDefault),
-    // @stacked-mock-spec
+    MockSpec<StripeService>(onMissingStub: OnMissingStub.returnDefault),
+// @stacked-mock-spec
   ],
 )
 void registerServices() {
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterDialogService();
-  // @stacked-mock-register
+  getAndRegisterStripeService();
+// @stacked-mock-register
 }
 
 MockNavigationService getAndRegisterNavigationService() {
@@ -76,6 +79,12 @@ MockDialogService getAndRegisterDialogService() {
   return service;
 }
 
+MockStripeService getAndRegisterStripeService() {
+  _removeRegistrationIfExists<StripeService>();
+  final service = MockStripeService();
+  locator.registerSingleton<StripeService>(service);
+  return service;
+}
 // @stacked-mock-create
 
 void _removeRegistrationIfExists<T extends Object>() {

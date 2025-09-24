@@ -18,19 +18,17 @@ class MapContainer extends StatelessWidget {
       options: MapOptions(
         initialCenter: MapConfig.defaultLocation,
         initialZoom: MapConfig.defaultZoom,
-        minZoom: 5.0,
-        maxZoom: 18.0,
-        onTap: (tapPosition, point) {
-          if (viewModel.selectedEvent != null) {
-            viewModel.closeEventDetails();
-          }
-        },
+        minZoom: MapConfig.minZoom,
+        maxZoom: MapConfig.maxZoom,
+        onTap: (tapPosition, point) {},
       ),
       children: [
         TileLayer(
-          urlTemplate: MapConfig.osmTileServer,
-          userAgentPackageName: 'com.example.event_booking',
-          maxZoom: 18,
+          urlTemplate: MapConfig.primaryTileServer,
+          subdomains: MapConfig.tileSubdomains,
+          userAgentPackageName: MapConfig.userAgentPackageName,
+          maxZoom: MapConfig.maxZoom,
+          minZoom: MapConfig.minZoom,
         ),
         MarkerLayer(
           markers: viewModel.markers,

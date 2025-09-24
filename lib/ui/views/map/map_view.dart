@@ -8,6 +8,10 @@ class MapView extends StackedView<MapViewmodel> {
 
   @override
   Widget builder(BuildContext context, MapViewmodel viewModel, Widget? child) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      viewModel.initialise();
+    });
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
@@ -15,19 +19,6 @@ class MapView extends StackedView<MapViewmodel> {
           MapContainer(viewModel: viewModel),
           MapSearchBar(viewModel: viewModel),
           MapControls(viewModel: viewModel),
-          if (viewModel.selectedEvent != null) ...[
-            BackgroundOverlay(
-              onTap: viewModel.closeEventDetails,
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: EventDetailsSheet(
-                selectedEvent: viewModel.selectedEvent!,
-              ),
-            ),
-          ],
         ],
       ),
     );
@@ -35,6 +26,6 @@ class MapView extends StackedView<MapViewmodel> {
 
   @override
   MapViewmodel viewModelBuilder(BuildContext context) {
-    return MapViewmodel()..initialise();
+    return MapViewmodel();
   }
 }

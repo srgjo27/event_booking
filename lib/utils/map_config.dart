@@ -6,18 +6,20 @@ class MapConfig {
   MapConfig._();
 
   // Default location (Jakarta, Indonesia)
-  static const LatLng defaultLocation = LatLng(-6.2088, 106.8456);
+  static const LatLng defaultLocation = LatLng(-6.21295, 106.8226);
 
   // Default zoom level
-  static const double defaultZoom = 15.0;
+  static const double defaultZoom = 14.0;
 
-  // OpenStreetMap tile server (FREE!)
-  static const String osmTileServer =
-      'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
-
-  // Alternative tile servers (all FREE!)
-  static const String cartoTileServer =
+  // Primary tile server - CartoDB (more reliable than OSM)
+  static const String primaryTileServer =
       'https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png';
+
+  // Tile layer configuration
+  static const List<String> tileSubdomains = ['a', 'b', 'c'];
+  static const String userAgentPackageName = 'com.event_booking';
+  static const double maxZoom = 18.0;
+  static const double minZoom = 5.0;
 
   // Sample event locations in Jakarta
   static List<Map<String, dynamic>> sampleEventLocations = [

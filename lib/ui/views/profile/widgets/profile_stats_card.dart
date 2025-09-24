@@ -14,7 +14,7 @@ class ProfileStatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Transform.translate(
-      offset: Offset(0, -30.h),
+      offset: Offset(0, -20.h),
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16.w),
         padding: EdgeInsets.all(16.w),

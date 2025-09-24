@@ -67,7 +67,7 @@ class ProfileMenuCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(12.r),
       child: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
         child: Row(
           children: [
             Container(
@@ -89,7 +89,7 @@ class ProfileMenuCard extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: 13.sp,
                   color: isDestructive ? Colors.red : AppColors.text,
                 ),
               ),
@@ -97,7 +97,7 @@ class ProfileMenuCard extends StatelessWidget {
             Icon(
               Icons.arrow_forward_ios,
               color: AppColors.text.withAlpha(76),
-              size: 16.sp,
+              size: 12.sp,
             ),
           ],
         ),

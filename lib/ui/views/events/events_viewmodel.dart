@@ -1,9 +1,11 @@
 import 'package:stacked/stacked.dart';
 
 class EventsViewModel extends BaseViewModel {
+  bool _hasNowEvents = false;
   bool _hasUpcomingEvents = false;
   bool _hasPastEvents = false;
 
+  bool get hasNowEvents => _hasNowEvents;
   bool get hasUpcomingEvents => _hasUpcomingEvents;
   bool get hasPastEvents => _hasPastEvents;
 
@@ -15,25 +17,34 @@ class EventsViewModel extends BaseViewModel {
     // TODO: Implement more options menu
   }
 
-  void loadUpcomingEvents() {
+  void loadNowEvents() {
     setBusy(true);
-    // TODO: Implement upcoming events loading logic
+    // TODO: Implement now events loading logic
     // For now, simulate loading
     Future.delayed(const Duration(seconds: 1), () {
-      _hasUpcomingEvents = false; // Set to true when you have actual data
+      _hasNowEvents = false;
       setBusy(false);
       notifyListeners();
     });
   }
 
+  void loadUpcomingEvents() {
+    setBusy(true);
+    // TODO: Implement upcoming events loading logic
+    // For now, simulate loading
+    _hasUpcomingEvents = false;
+    notifyListeners();
+  }
+
   void loadPastEvents() {
     // TODO: Implement past events loading logic
     // For now, simulate that there are no past events
-    _hasPastEvents = false; // Set to true when you have actual data
+    _hasPastEvents = false;
     notifyListeners();
   }
 
   void loadEvents() {
+    loadNowEvents();
     loadUpcomingEvents();
     loadPastEvents();
   }

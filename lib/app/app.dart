@@ -8,6 +8,8 @@ import 'package:event_booking/ui/views/login/login_view.dart';
 import 'package:event_booking/ui/views/register/register_view.dart';
 import 'package:event_booking/ui/views/verfication/verfication_view.dart';
 import 'package:event_booking/ui/bottom_sheets/base/base_sheet.dart';
+import 'package:event_booking/services/stripe_service.dart';
+import 'package:event_booking/ui/bottom_sheets/event_detail/event_detail_sheet.dart';
 // @stacked-import
 
 @StackedApp(
@@ -24,10 +26,12 @@ import 'package:event_booking/ui/bottom_sheets/base/base_sheet.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
-    // @stacked-service
+    LazySingleton(classType: StripeService),
+// @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: BaseSheet),
+    StackedBottomsheet(classType: EventDetailSheet),
 // @stacked-bottom-sheet
   ],
   dialogs: [

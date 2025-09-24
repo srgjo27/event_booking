@@ -1,30 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 import 'package:event_booking/models/map_models.dart';
+import 'package:event_booking/app/app.locator.dart';
+import 'package:event_booking/app/app.bottomsheets.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:event_booking/utils/map_config.dart';
 
 class MapViewmodel extends BaseViewModel {
   final MapController _mapController = MapController();
+  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+
   MapController get mapController => _mapController;
 
   List<Marker> _markers = [];
-  SelectedEvent? _selectedEvent;
   final LatLng _currentLocation = MapConfig.defaultLocation;
   bool _isListView = false;
   String _searchQuery = '';
   double _currentZoom = MapConfig.defaultZoom;
+  bool _isInitialized = false;
 
   List<Marker> get markers => _markers;
-  SelectedEvent? get selectedEvent => _selectedEvent;
   LatLng get currentLocation => _currentLocation;
   bool get isListView => _isListView;
   String get searchQuery => _searchQuery;
   double get currentZoom => _currentZoom;
 
   void initialise() {
+    if (_isInitialized) return;
+
     _loadEventMarkers();
+    _isInitialized = true;
     notifyListeners();
   }
 
@@ -61,14 +68,24 @@ class MapViewmodel extends BaseViewModel {
   }
 
   void _onMarkerTapped(Map<String, dynamic> eventData) {
-    _selectedEvent = SelectedEvent(
+    final selectedEvent = SelectedEvent(
       title: eventData['title'],
       location: eventData['location'],
       date: 'Oct 25, 2024',
       description: 'Join us for an amazing ${eventData['category']} event!',
       imageUrl: '',
     );
-    notifyListeners();
+
+    _showEventBottomSheet(selectedEvent);
+  }
+
+  void _showEventBottomSheet(SelectedEvent event) {
+    _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.eventDetail,
+      title: event.title,
+      description: event.description,
+      data: event,
+    );
   }
 
   void onSearchChanged(String query) {
@@ -107,22 +124,13 @@ class MapViewmodel extends BaseViewModel {
   }
 
   void onDirectionsPressed() {
-    if (_selectedEvent != null) {
-      // TODO: Open directions to event location
-      debugPrint('Getting directions to: ${_selectedEvent!.location}');
-    }
+    // TODO: Show directions bottom sheet or navigate to directions
+    debugPrint('Getting directions');
   }
 
   void onViewEventPressed() {
-    if (_selectedEvent != null) {
-      // TODO: Navigate to event details page
-      debugPrint('Viewing event: ${_selectedEvent!.title}');
-    }
-  }
-
-  void closeEventDetails() {
-    _selectedEvent = null;
-    notifyListeners();
+    // TODO: Navigate to event details page
+    debugPrint('Viewing event details');
   }
 
   void _filterMarkers() {
@@ -172,9 +180,5 @@ class MapViewmodel extends BaseViewModel {
         ),
       );
     }).toList();
-  }
-
-  void moveToLocation(LatLng location) {
-    _mapController.move(location, _currentZoom);
   }
 }
