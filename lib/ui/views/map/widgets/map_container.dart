@@ -27,17 +27,14 @@ class MapContainer extends StatelessWidget {
         },
       ),
       children: [
-        // OpenStreetMap tile layer (FREE!)
         TileLayer(
           urlTemplate: MapConfig.osmTileServer,
           userAgentPackageName: 'com.example.event_booking',
           maxZoom: 18,
         ),
-        // Event markers layer
         MarkerLayer(
           markers: viewModel.markers,
         ),
-        // Current location marker
         MarkerLayer(
           markers: [
             Marker(
@@ -51,7 +48,7 @@ class MapContainer extends StatelessWidget {
                   border: Border.all(color: Colors.white, width: 3),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.blue.withOpacity(0.3),
+                      color: Colors.blue.withAlpha(77),
                       blurRadius: 10,
                       spreadRadius: 5,
                     ),

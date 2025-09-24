@@ -21,7 +21,8 @@ class HomeEventCardWidget extends StatelessWidget {
     return Container(
       width: 232.w,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18.r),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.grey.shade200, width: 1.w),
       ),
       child: Column(
@@ -42,7 +43,7 @@ class HomeEventCardWidget extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 0),
       decoration: BoxDecoration(
         color: CategoryUtils.getCategoryColor(event.category),
-        borderRadius: BorderRadius.circular(12.r),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: Stack(
         children: [

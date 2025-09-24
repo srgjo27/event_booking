@@ -16,7 +16,7 @@ class EventDetailsSheet extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24.r)),
       ),
       child: SingleChildScrollView(
         padding: EdgeInsets.all(16.w),
@@ -24,7 +24,6 @@ class EventDetailsSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Handle bar
             Center(
               child: Container(
                 width: 40.w,
@@ -36,19 +35,13 @@ class EventDetailsSheet extends StatelessWidget {
               ),
             ),
             SizedBox(height: 16.h),
-
-            // Event Name
             Text(
               selectedEvent.title,
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
             ),
-            SizedBox(height: 8.h),
-
-            // Event Date and Time
+            SizedBox(height: 12.h),
             Row(
               children: [
                 Icon(
@@ -59,16 +52,14 @@ class EventDetailsSheet extends StatelessWidget {
                 SizedBox(width: 8.w),
                 Text(
                   selectedEvent.date,
-                  style: TextStyle(
-                    fontSize: 14.sp,
-                    color: Colors.black54,
-                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(fontSize: 14.sp),
                 ),
               ],
             ),
             SizedBox(height: 8.h),
-
-            // Event Location
             Row(
               children: [
                 Icon(
@@ -80,58 +71,45 @@ class EventDetailsSheet extends StatelessWidget {
                 Expanded(
                   child: Text(
                     selectedEvent.location,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.black54,
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(fontSize: 14.sp),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 16.h),
-
-            // Event Description
             Text(
               selectedEvent.description,
-              style: TextStyle(
-                fontSize: 14.sp,
-                color: Colors.black87,
-                height: 1.5,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge,
             ),
-            SizedBox(height: 24.h),
-
-            // Action Buttons
+            SizedBox(height: 20.h),
             Row(
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {
-                      // Handle save event
-                    },
+                    onPressed: () {},
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 12.h),
-                      side: BorderSide(color: AppColors.primary),
+                      side: BorderSide(color: AppColors.primary, width: 1.5.w),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.r),
                       ),
                     ),
                     child: Text(
                       'Save Event',
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: AppColors.primary),
                     ),
                   ),
                 ),
                 SizedBox(width: 12.w),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Handle view details
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
                       padding: EdgeInsets.symmetric(vertical: 12.h),
@@ -141,11 +119,10 @@ class EventDetailsSheet extends StatelessWidget {
                     ),
                     child: Text(
                       'View Details',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(color: Colors.white),
                     ),
                   ),
                 ),

@@ -4,6 +4,7 @@ import 'package:event_booking/ui/common/bottom_nav_bar.dart';
 import 'package:event_booking/ui/views/events/events_view.dart';
 import 'package:event_booking/ui/views/home/home_view.dart';
 import 'package:event_booking/ui/views/map/map_view.dart';
+import 'package:event_booking/ui/views/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stacked/stacked.dart';
@@ -24,7 +25,7 @@ class MainView extends StackedView<MainViewModel> {
           HomeView(),
           EventsView(),
           MapView(),
-          Center(child: Text('Profile View')),
+          ProfileView(),
         ],
       ),
       bottomNavigationBar: CustomBottomNavBar(

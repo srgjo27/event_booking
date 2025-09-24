@@ -23,7 +23,7 @@ class MapSearchBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withAlpha(25),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
