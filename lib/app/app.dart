@@ -10,6 +10,7 @@ import 'package:event_booking/ui/views/verfication/verfication_view.dart';
 import 'package:event_booking/ui/bottom_sheets/base/base_sheet.dart';
 import 'package:event_booking/services/stripe_service.dart';
 import 'package:event_booking/ui/bottom_sheets/event_detail/event_detail_sheet.dart';
+import 'package:event_booking/ui/views/events/event_detail/event_detail_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -20,6 +21,7 @@ import 'package:event_booking/ui/bottom_sheets/event_detail/event_detail_sheet.d
     MaterialRoute(page: LoginView),
     MaterialRoute(page: RegisterView),
     MaterialRoute(page: VerficationView),
+    MaterialRoute(page: EventDetailView),
 // @stacked-route
   ],
   dependencies: [

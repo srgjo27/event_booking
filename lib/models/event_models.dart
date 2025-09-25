@@ -9,6 +9,7 @@ class Category {
 }
 
 class Event {
+  final String id;
   final String title;
   final String address;
   final String eventDate;
@@ -22,6 +23,7 @@ class Event {
   final bool isBookmarked;
 
   Event({
+    required this.id,
     required this.title,
     required this.address,
     required this.eventDate,

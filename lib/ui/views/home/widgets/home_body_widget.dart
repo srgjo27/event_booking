@@ -82,6 +82,7 @@ class HomeBodyWidget extends StatelessWidget {
             child: HomeEventCardWidget(
               event: event,
               viewModel: viewModel,
+              onTap: () => viewModel.navigateToEventDetail(event),
             ),
           );
         },

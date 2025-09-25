@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:event_booking/models/models.dart';
+import 'package:event_booking/models/event_models.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/utils/utils.dart';
 import '../home_viewmodel.dart';
@@ -9,30 +9,35 @@ import '../home_viewmodel.dart';
 class HomeEventCardWidget extends StatelessWidget {
   final Event event;
   final HomeViewModel viewModel;
+  final VoidCallback? onTap;
 
   const HomeEventCardWidget({
     Key? key,
     required this.event,
     required this.viewModel,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 232.w,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.grey.shade200, width: 1.w),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildEventImage(context),
-          Expanded(
-            child: _buildEventDetails(context),
-          )
-        ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 232.w,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(color: Colors.grey.shade200, width: 1.w),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildEventImage(context),
+            Expanded(
+              child: _buildEventDetails(context),
+            )
+          ],
+        ),
       ),
     );
   }
