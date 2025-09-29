@@ -1,6 +1,7 @@
 import 'package:event_booking/ui/common/app_images.dart';
 import 'package:event_booking/ui/views/events/events_viewmodel.dart';
 import 'package:event_booking/ui/views/events/widgets/event_card_widget.dart';
+import 'package:event_booking/ui/views/events/widgets/event_card_shimmer.dart';
 import 'package:event_booking/models/event_models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -130,7 +131,7 @@ class EventsView extends StackedView<EventsViewModel> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (!viewModel.isBusy && events.isNotEmpty)
+          if (!viewModel.isLoading && events.isNotEmpty)
             Padding(
               padding: EdgeInsets.only(bottom: 10.h, top: 8.h),
               child: Text(
@@ -142,9 +143,11 @@ class EventsView extends StackedView<EventsViewModel> {
               ),
             ),
           Expanded(
-            child: viewModel.isBusy
-                ? const Center(
-                    child: CircularProgressIndicator(),
+            child: viewModel.isLoading
+                ? ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: 3,
+                    itemBuilder: (context, index) => const EventCardShimmer(),
                   )
                 : events.isEmpty
                     ? _buildEmptyState(
@@ -152,18 +155,25 @@ class EventsView extends StackedView<EventsViewModel> {
                         emptyTitle,
                         emptySubtitle,
                       )
-                    : ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: events.length,
-                        itemBuilder: (context, index) {
-                          final event = events[index];
-                          return EventCardWidget(
-                            event: event,
-                            onTap: () => viewModel.navigateToEventDetail(event),
-                            onBookmarkTap: () =>
-                                viewModel.toggleEventBookmark(event),
-                          );
-                        },
+                    : RefreshIndicator(
+                        onRefresh: () => viewModel.refreshEvents(),
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: events.length,
+                          itemBuilder: (context, index) {
+                            final event = events[index];
+                            return EventCardWidget(
+                              event: event,
+                              onTap: () =>
+                                  viewModel.navigateToEventDetail(event),
+                              onBookmarkTap: () =>
+                                  viewModel.toggleEventBookmark(event),
+                              isBookmarkLoading:
+                                  viewModel.isEventBookmarkLoading(event.id),
+                            );
+                          },
+                        ),
                       ),
           ),
         ],

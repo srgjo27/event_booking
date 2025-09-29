@@ -1,24 +1,35 @@
 import 'package:event_booking/app/app.locator.dart';
 import 'package:event_booking/app/app.router.dart';
 import 'package:event_booking/models/event_models.dart';
+import 'package:event_booking/mixins/loading_mixin.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class EventsViewModel extends BaseViewModel {
+class EventsViewModel extends BaseViewModel with LoadingMixin {
   final _navigationService = locator<NavigationService>();
 
   List<Event> _allEvents = [];
   List<Event> _nowEvents = [];
   List<Event> _upcomingEvents = [];
   List<Event> _pastEvents = [];
+  String? _bookmarkingEventId;
 
   List<Event> get allEvents => _allEvents;
   List<Event> get nowEvents => _nowEvents;
   List<Event> get upcomingEvents => _upcomingEvents;
   List<Event> get pastEvents => _pastEvents;
 
-  void onSearchPressed() {
-    // TODO: Implement search functionality
+  bool isEventBookmarkLoading(String eventId) => _bookmarkingEventId == eventId;
+
+  Future<void> onSearchPressed() async {
+    await withLoading(() async {
+      // TODO: Implement search functionality
+      // Simulate search operation
+      await Future.delayed(const Duration(milliseconds: 500));
+
+      // For now, just show a placeholder
+      notifyListeners();
+    });
   }
 
   void onMorePressed() {
@@ -29,13 +40,51 @@ class EventsViewModel extends BaseViewModel {
     _navigationService.navigateToEventDetailView(event: event);
   }
 
-  void toggleEventBookmark(Event event) {
-    final index = _allEvents.indexWhere((e) => e.id == event.id);
-    if (index != -1) {
-      // In a real app, you would update this in a service or repository
-      // For now, we'll just toggle the local state
+  Future<void> toggleEventBookmark(Event event) async {
+    _bookmarkingEventId = event.id;
+    notifyListeners();
+
+    try {
+      final index = _allEvents.indexWhere((e) => e.id == event.id);
+      if (index != -1) {
+        // Simulate API call delay
+        await Future.delayed(const Duration(milliseconds: 800));
+
+        // In a real app, you would update this in a service or repository
+        // Update the event in all relevant lists
+        final updatedEvent = Event(
+          id: event.id,
+          title: event.title,
+          address: event.address,
+          eventDate: event.eventDate,
+          month: event.month,
+          day: event.day,
+          time: event.time,
+          attendeesCount: event.attendeesCount,
+          imageUrl: event.imageUrl,
+          category: event.category,
+          price: event.price,
+          isBookmarked: !event.isBookmarked,
+        );
+
+        _allEvents[index] = updatedEvent;
+        _categorizeEvents();
+      }
+    } finally {
+      _bookmarkingEventId = null;
       notifyListeners();
     }
+  }
+
+  Future<void> refreshEvents() async {
+    await withLoading(() async {
+      // Simulate refresh operation
+      await Future.delayed(const Duration(seconds: 2));
+
+      _loadSampleEvents();
+      _categorizeEvents();
+      notifyListeners();
+    });
   }
 
   void _loadSampleEvents() {
@@ -160,14 +209,12 @@ class EventsViewModel extends BaseViewModel {
     _pastEvents.sort((a, b) => b.eventDate.compareTo(a.eventDate));
   }
 
-  void loadEvents() {
-    setBusy(true);
+  Future<void> loadEvents() async {
+    await withLoading(() async {
+      await Future.delayed(const Duration(seconds: 1));
 
-    // Simulate loading delay
-    Future.delayed(const Duration(seconds: 1), () {
       _loadSampleEvents();
       _categorizeEvents();
-      setBusy(false);
       notifyListeners();
     });
   }

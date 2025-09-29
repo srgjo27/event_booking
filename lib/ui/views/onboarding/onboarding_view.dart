@@ -29,7 +29,7 @@ class OnboardingView extends StackedView<OnboardingViewModel> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.only(
-                        top: 20.h, left: 16.w, right: 16.w, bottom: 12.h),
+                        top: 20.h, left: 16.w, right: 16.w, bottom: 4.h),
                     child: Image.asset(
                       viewModel.contents[index].image,
                       fit: BoxFit.contain,

@@ -10,18 +10,20 @@ class EventCardWidget extends StatelessWidget {
   final Event event;
   final VoidCallback? onTap;
   final VoidCallback? onBookmarkTap;
+  final bool isBookmarkLoading;
 
   const EventCardWidget({
     Key? key,
     required this.event,
     this.onTap,
     this.onBookmarkTap,
+    this.isBookmarkLoading = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.h),
+      margin: EdgeInsets.only(bottom: 12.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
@@ -61,12 +63,15 @@ class EventCardWidget extends StatelessWidget {
           event.imageUrl ?? '',
           fit: BoxFit.cover,
           errorBuilder: (context, error, stackTrace) {
-            return Container(
-              color: EventUtils.getCategoryColor(event.category),
-              child: SvgPicture.asset(
-                EventUtils.getCategoryIcon(event.category),
-              ),
-            );
+            return EventUtils.getCategoryIcon(event.category).isNotEmpty
+                ? Center(
+                    child: SvgPicture.asset(
+                      EventUtils.getCategoryIcon(event.category),
+                      width: 24.w,
+                      height: 24.w,
+                    ),
+                  )
+                : Icon(Icons.event, color: Colors.white, size: 24.sp);
           },
         ),
       ),
@@ -83,7 +88,7 @@ class EventCardWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
               decoration: BoxDecoration(
                 color: EventUtils.getCategoryColor(event.category),
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(8.r),
               ),
               child: Text(
                 event.category.toUpperCase(),
@@ -106,7 +111,7 @@ class EventCardWidget extends StatelessWidget {
           event.title,
           style: Theme.of(context)
               .textTheme
-              .titleMedium
+              .titleSmall
               ?.copyWith(fontWeight: FontWeight.bold),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
@@ -168,8 +173,8 @@ class EventCardWidget extends StatelessWidget {
 
   Widget _buildBookmarkButton() {
     return Container(
-      width: 24.w,
-      height: 24.w,
+      width: 28.w,
+      height: 28.w,
       decoration: BoxDecoration(
         color: event.isBookmarked
             ? AppColors.vibrantRed.withAlpha(25)
@@ -179,15 +184,30 @@ class EventCardWidget extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: onBookmarkTap,
+          onTap: isBookmarkLoading ? null : onBookmarkTap,
           borderRadius: BorderRadius.circular(8.r),
-          child: Icon(
-            event.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-            size: 16.sp,
-            color: event.isBookmarked
-                ? AppColors.vibrantRed
-                : Colors.grey.shade400,
-          ),
+          child: isBookmarkLoading
+              ? Center(
+                  child: SizedBox(
+                    width: 16.w,
+                    height: 16.w,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        event.isBookmarked
+                            ? AppColors.vibrantRed
+                            : Colors.grey.shade400,
+                      ),
+                    ),
+                  ),
+                )
+              : Icon(
+                  event.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                  size: 16.sp,
+                  color: event.isBookmarked
+                      ? AppColors.vibrantRed
+                      : Colors.grey.shade400,
+                ),
         ),
       ),
     );
