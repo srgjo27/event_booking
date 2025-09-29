@@ -19,4 +19,6 @@ class AppImages {
   static const String imgFilter = 'assets/images/img_filter.png';
   static const String imgIllustrationEmptyEvent =
       'assets/images/illustration_empty_event.png';
+  static const String imgIllustrationMusicEvent =
+      'assets/images/illustration_music_event.png';
 }

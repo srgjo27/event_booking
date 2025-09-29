@@ -4,6 +4,7 @@ import 'package:event_booking/app/app.router.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/common/app_icons.dart';
 import 'package:event_booking/models/event_models.dart';
+import 'package:event_booking/ui/common/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -54,7 +55,7 @@ class HomeViewModel extends BaseViewModel {
       day: '10',
       time: '18:00',
       attendeesCount: 120,
-      imageUrl: 'assets/images/event_music.jpg',
+      imageUrl: AppImages.imgIllustrationMusicEvent,
       category: 'Music',
       price: 25.0,
       isBookmarked: true,
@@ -68,7 +69,7 @@ class HomeViewModel extends BaseViewModel {
       day: '15',
       time: '20:00',
       attendeesCount: 89000,
-      imageUrl: 'assets/images/event_sports.jpg',
+      imageUrl: null,
       category: 'Sports',
       price: 45.0,
       isBookmarked: false,
@@ -82,7 +83,7 @@ class HomeViewModel extends BaseViewModel {
       day: '20',
       time: '12:00',
       attendeesCount: 2500,
-      imageUrl: 'assets/images/event_food.jpg',
+      imageUrl: null,
       category: 'Food',
       price: 15.0,
       isBookmarked: true,
@@ -96,7 +97,7 @@ class HomeViewModel extends BaseViewModel {
       day: '05',
       time: '10:00',
       attendeesCount: 350,
-      imageUrl: 'assets/images/event_art.jpg',
+      imageUrl: null,
       category: 'Art',
       price: 12.0,
       isBookmarked: false,
@@ -110,7 +111,7 @@ class HomeViewModel extends BaseViewModel {
       day: '18',
       time: '19:30',
       attendeesCount: 780,
-      imageUrl: 'assets/images/event_jazz.jpg',
+      imageUrl: null,
       category: 'Music',
       price: 35.0,
       isBookmarked: true,
@@ -124,7 +125,7 @@ class HomeViewModel extends BaseViewModel {
       day: '12',
       time: '08:00',
       attendeesCount: 45000,
-      imageUrl: 'assets/images/event_marathon.jpg',
+      imageUrl: null,
       category: 'Sports',
       price: 0.0,
       isBookmarked: false,
@@ -138,7 +139,7 @@ class HomeViewModel extends BaseViewModel {
       day: '25',
       time: '11:00',
       attendeesCount: 1200,
-      imageUrl: 'assets/images/event_street_food.jpg',
+      imageUrl: null,
       category: 'Food',
       price: 8.0,
       isBookmarked: true,
@@ -152,7 +153,7 @@ class HomeViewModel extends BaseViewModel {
       day: '08',
       time: '14:00',
       attendeesCount: 50,
-      imageUrl: 'assets/images/event_photography.jpg',
+      imageUrl: null,
       category: 'Art',
       price: 75.0,
       isBookmarked: false,

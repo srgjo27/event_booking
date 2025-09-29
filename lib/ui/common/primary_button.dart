@@ -18,24 +18,21 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final buttonColor = color ?? AppColors.accent;
+    final buttonColor = color ?? AppColors.vibrantRed;
     final isEnabled = onPressed != null;
 
     return SizedBox(
       width: double.infinity,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15.r),
-          color: isEnabled ? buttonColor : AppColors.accent.withAlpha(100),
+          borderRadius: BorderRadius.circular(12.r),
+          color: isEnabled ? buttonColor : AppColors.vibrantRed.withAlpha(100),
         ),
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 12.h),
             shadowColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.r),
-            ),
           ),
           child: Stack(
             alignment: Alignment.center,

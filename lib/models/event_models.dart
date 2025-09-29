@@ -17,7 +17,7 @@ class Event {
   final String day;
   final String time;
   final int attendeesCount;
-  final String imageUrl;
+  final String? imageUrl;
   final String category;
   final double price;
   final bool isBookmarked;
@@ -31,7 +31,7 @@ class Event {
     required this.day,
     required this.time,
     required this.attendeesCount,
-    required this.imageUrl,
+    this.imageUrl,
     required this.category,
     required this.price,
     this.isBookmarked = false,

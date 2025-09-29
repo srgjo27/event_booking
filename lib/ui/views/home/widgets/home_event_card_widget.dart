@@ -1,8 +1,8 @@
+import 'package:event_booking/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:event_booking/models/event_models.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
-import 'package:event_booking/utils/utils.dart';
 import '../home_viewmodel.dart';
 
 /// Event card widget for displaying individual event information
@@ -43,22 +43,33 @@ class HomeEventCardWidget extends StatelessWidget {
   }
 
   Widget _buildEventImage(BuildContext context) {
+    final hasValidImage = event.imageUrl != null && event.imageUrl!.isNotEmpty;
+
     return Container(
       height: 120.h,
       margin: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 0),
       decoration: BoxDecoration(
-        color: CategoryUtils.getCategoryColor(event.category),
         borderRadius: BorderRadius.circular(8.r),
+        color: hasValidImage
+            ? null
+            : CategoryUtils.getCategoryColor(event.category),
+        image: hasValidImage
+            ? DecorationImage(
+                image: AssetImage(event.imageUrl!),
+                fit: BoxFit.cover,
+              )
+            : null,
       ),
       child: Stack(
         children: [
-          Center(
-            child: Icon(
-              Icons.image,
-              size: 60.w,
-              color: Colors.white,
+          if (!hasValidImage)
+            Center(
+              child: Icon(
+                Icons.image,
+                size: 40.sp,
+                color: Colors.grey.shade400,
+              ),
             ),
-          ),
           Positioned(
             top: 8.h,
             left: 8.w,
@@ -76,9 +87,9 @@ class HomeEventCardWidget extends StatelessWidget {
 
   Widget _buildDateContainer(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 4.h, horizontal: 8.w),
+      padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 6.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withAlpha(50),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
@@ -86,14 +97,14 @@ class HomeEventCardWidget extends StatelessWidget {
         children: [
           Text(
             event.day,
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: AppColors.vibrantRed,
                   fontWeight: FontWeight.bold,
                 ),
           ),
           Text(
             event.month,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppColors.vibrantRed,
                   fontWeight: FontWeight.w500,
                 ),
@@ -107,7 +118,7 @@ class HomeEventCardWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(8.w),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.white.withAlpha(50),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Icon(event.isBookmarked ? Icons.bookmark : Icons.bookmark_border,

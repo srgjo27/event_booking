@@ -6,7 +6,7 @@ import 'package:event_booking/app/app.locator.dart';
 import 'package:event_booking/app/app.bottomsheets.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:event_booking/utils/map_config.dart';
+import 'package:event_booking/utils/utils.dart';
 
 class MapViewmodel extends BaseViewModel {
   final MapController _mapController = MapController();

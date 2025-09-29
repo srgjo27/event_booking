@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:event_booking/ui/views/map/map_viewmodel.dart';
-import 'package:event_booking/utils/map_config.dart';
+import 'package:event_booking/utils/utils.dart';
 
 class MapContainer extends StatelessWidget {
   final MapViewmodel viewModel;
