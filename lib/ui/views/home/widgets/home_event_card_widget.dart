@@ -50,9 +50,8 @@ class HomeEventCardWidget extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
-        color: hasValidImage
-            ? null
-            : CategoryUtils.getCategoryColor(event.category),
+        color:
+            hasValidImage ? null : EventUtils.getCategoryColor(event.category),
         image: hasValidImage
             ? DecorationImage(
                 image: AssetImage(event.imageUrl!),

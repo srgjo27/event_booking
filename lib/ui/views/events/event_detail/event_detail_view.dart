@@ -94,7 +94,7 @@ class EventDetailView extends StackedView<EventDetailViewModel> {
                     },
                   )
                 : Container(
-                    color: CategoryUtils.getCategoryColor(event.category),
+                    color: EventUtils.getCategoryColor(event.category),
                     child: Icon(
                       Icons.image_not_supported,
                       size: 42.sp,
@@ -139,7 +139,7 @@ class EventDetailView extends StackedView<EventDetailViewModel> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
               decoration: BoxDecoration(
-                color: CategoryUtils.getCategoryColor(event.category),
+                color: EventUtils.getCategoryColor(event.category),
                 borderRadius: BorderRadius.circular(20.r),
               ),
               child: Text(
