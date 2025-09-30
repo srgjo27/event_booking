@@ -146,24 +146,6 @@ class EventDetailSheet extends StackedView<EventDetailSheetModel> {
                   ),
                 ],
               ),
-            ] else ...[
-              Text(
-                request.title ?? 'No Title',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              if (request.description != null) ...[
-                SizedBox(height: 12.h),
-                Text(
-                  request.description!,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey[600],
-                      ),
-                  maxLines: 3,
-                  softWrap: true,
-                ),
-              ],
             ],
             SizedBox(height: 16.h),
           ],
