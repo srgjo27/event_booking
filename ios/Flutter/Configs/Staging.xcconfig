@@ -1,0 +1,15 @@
+//
+// Staging Configuration
+//
+#include "Generated.xcconfig"
+
+// Application Bundle Identifier
+PRODUCT_BUNDLE_IDENTIFIER = com.eventhub.app.staging
+BUNDLE_DISPLAY_NAME = EventHub Staging
+BUNDLE_NAME = event_booking_staging
+
+// Flutter Build Mode
+FLUTTER_BUILD_MODE = release
+
+// Target specific build settings
+IPHONEOS_DEPLOYMENT_TARGET = 12.0

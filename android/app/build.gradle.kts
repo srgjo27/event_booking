@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.event_booking"
+    namespace = "com.eventhub.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,18 +20,42 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.event_booking"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        applicationId = "com.eventhub.app.dev"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        resValue("string", "app_name", "EventHub Dev")
+    }
+
+    flavorDimensions += "default"
+    productFlavors {
+        create("development") {
+            dimension = "default"
+            applicationId = "com.eventhub.app.dev"
+            versionNameSuffix = "-dev"
+            resValue("string", "app_name", "EventHub Dev")
+        }
+        create("staging") {
+            dimension = "default"
+            applicationId = "com.eventhub.app.staging"
+            versionNameSuffix = "-staging"
+            resValue("string", "app_name", "EventHub Staging")
+        }
+        create("production") {
+            dimension = "default"
+            applicationId = "com.eventhub.app"
+            resValue("string", "app_name", "EventHub")
+        }
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+            signingConfig = signingConfigs.getByName("debug")
+        }
         release {
+            isDebuggable = false
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
