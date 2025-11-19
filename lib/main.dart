@@ -1,21 +1,18 @@
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:event_booking/app/app.bottomsheets.dart';
-import 'package:event_booking/app/app.dialogs.dart';
-import 'package:event_booking/app/app.locator.dart';
 import 'package:event_booking/app/app.router.dart';
 import 'package:event_booking/config/app_config.dart';
-import 'package:event_booking/config/development_config.dart';
+import 'package:event_booking/services/app_initializer.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppConfig.initialize(DevelopmentConfig.config);
-  await setupLocator();
-  setupDialogUi();
-  setupBottomSheetUi();
+  await AppInitializer.initialize(
+    environment: AppEnvironment.development,
+  );
+  await AppInitializer.handleInitialMessage();
   runApp(const MainApp());
 }
 

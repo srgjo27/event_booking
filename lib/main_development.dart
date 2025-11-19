@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import 'app/app.locator.dart';
 import 'app/app.router.dart';
 import 'config/app_config.dart';
-import 'config/development_config.dart';
+import 'services/app_initializer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppConfig.initialize(DevelopmentConfig.config);
-  await setupLocator();
+  await AppInitializer.initialize(
+    environment: AppEnvironment.development,
+  );
+  await AppInitializer.handleInitialMessage();
   runApp(const MainApp());
 }
 
