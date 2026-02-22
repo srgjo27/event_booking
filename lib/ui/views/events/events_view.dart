@@ -26,9 +26,7 @@ class EventsView extends StackedView<EventsViewModel> {
                 children: [
                   Text(
                     'Events',
-                    style: TextTheme.of(context)
-                        .titleLarge
-                        ?.copyWith(fontWeight: FontWeight.w500),
+                    style: TextTheme.of(context).titleLarge,
                   ),
                   IconButton(
                     icon: const Icon(Icons.more_vert, color: Colors.black),
@@ -42,11 +40,11 @@ class EventsView extends StackedView<EventsViewModel> {
             margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
-              borderRadius: BorderRadius.circular(10.r),
+              borderRadius: BorderRadius.circular(12.r),
             ),
             child: TabBar(
               indicator: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(12.r),
                 color: Theme.of(context).primaryColor,
               ),
               indicatorSize: TabBarIndicatorSize.tab,
@@ -132,16 +130,11 @@ class EventsView extends StackedView<EventsViewModel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (!viewModel.isLoading && events.isNotEmpty)
-            Padding(
-              padding: EdgeInsets.only(bottom: 10.h, top: 8.h),
-              child: Text(
-                '${events.length} ${events.length == 1 ? 'Event' : 'Events'} Found',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Colors.grey.shade600,
-                    ),
-              ),
+            Text(
+              '${events.length} ${events.length == 1 ? 'Event' : 'Events'} Found',
+              style: Theme.of(context).textTheme.titleMedium,
             ),
+          SizedBox(height: 16.h),
           Expanded(
             child: viewModel.isLoading
                 ? ListView.builder(
@@ -163,6 +156,7 @@ class EventsView extends StackedView<EventsViewModel> {
                           itemCount: events.length,
                           itemBuilder: (context, index) {
                             final event = events[index];
+
                             return EventCardWidget(
                               event: event,
                               onTap: () =>
@@ -198,33 +192,26 @@ class EventsView extends StackedView<EventsViewModel> {
                   color: Colors.grey.shade200,
                   borderRadius: BorderRadius.circular(60.r),
                 ),
-                child: Icon(
-                  Icons.event_note_outlined,
-                  size: 48.sp,
-                  color: Colors.grey.shade400,
-                ),
+                child: Icon(Icons.event_note_outlined, size: 48.sp),
               );
             },
           ),
-          SizedBox(height: 24.h),
+          SizedBox(height: 20.h),
           Text(
             title,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey.shade700,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.w600),
           ),
-          SizedBox(height: 8.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.w),
-            child: Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey.shade500,
-                    height: 1.4,
-                  ),
-            ),
+          SizedBox(height: 6.h),
+          Text(
+            subtitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: Colors.grey.shade500),
           ),
         ],
       ),

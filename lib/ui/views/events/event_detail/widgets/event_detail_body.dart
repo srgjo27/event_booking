@@ -28,13 +28,12 @@ Widget _buildEventDetails(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildEventHeader(context, viewModel, event),
-        SizedBox(height: 24.h),
+        SizedBox(height: 20.h),
         _buildEventInfo(context, event),
-        SizedBox(height: 28.h),
+        SizedBox(height: 20.h),
         _buildEventDescription(context),
-        SizedBox(height: 28.h),
+        SizedBox(height: 20.h),
         _buildAttendeesSection(context, viewModel, event),
-        SizedBox(height: 50.h),
       ],
     ),
   );
@@ -49,6 +48,7 @@ Widget _buildEventHeader(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
@@ -58,23 +58,20 @@ Widget _buildEventHeader(
             ),
             child: Text(
               event.category.toUpperCase(),
-              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .labelSmall
+                  ?.copyWith(fontWeight: FontWeight.w600),
             ),
           ),
-          const Spacer(),
           Text(
             viewModel.formatPrice(event.price),
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: AppColors.primary,
-                  fontWeight: FontWeight.bold,
-                ),
+                color: AppColors.primary, fontWeight: FontWeight.bold),
           ),
         ],
       ),
-      SizedBox(height: 12.h),
+      SizedBox(height: 16.h),
       Text(
         event.title,
         style: Theme.of(context)
@@ -126,7 +123,7 @@ Widget _buildEventInfo(
           ),
         ],
       ),
-      SizedBox(height: 12.h),
+      SizedBox(height: 16.h),
       Row(
         children: [
           _buildInfoCard(
@@ -156,7 +153,7 @@ Widget _buildInfoCard(
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(12.r),
-      boxShadow: [BoxShadow(color: Colors.black.withAlpha(13), blurRadius: 50)],
+      border: Border.all(color: Colors.grey.shade200, width: 1.w),
     ),
     child: Column(
       crossAxisAlignment:
@@ -172,24 +169,19 @@ Widget _buildInfoCard(
                       color: color.withAlpha(25),
                       borderRadius: BorderRadius.circular(12.r),
                     ),
-                    child: Icon(
-                      icon,
-                      color: color,
-                      size: 16.sp,
-                    ),
+                    child: Icon(icon, color: color),
                   ),
-                  SizedBox(width: 8.h),
+                  SizedBox(width: 6.h),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         title,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.text.withAlpha(153),
-                              fontWeight: FontWeight.w500,
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: AppColors.text.withAlpha(153)),
                       ),
-                      SizedBox(height: 4.h),
                       Text(
                         value,
                         style: Theme.of(context)
@@ -212,15 +204,15 @@ Widget _buildInfoCard(
                       color: color.withAlpha(25),
                       borderRadius: BorderRadius.circular(12.r),
                     ),
-                    child: Icon(icon, color: color, size: 16.sp),
+                    child: Icon(icon, color: color),
                   ),
-                  SizedBox(height: 6.h),
+                  SizedBox(height: 4.h),
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.text.withAlpha(153),
-                          fontWeight: FontWeight.w500,
-                        ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(color: AppColors.text.withAlpha(153)),
                   ),
                   SizedBox(height: 4.h),
                   Text(
@@ -248,7 +240,7 @@ Widget _buildEventDescription(BuildContext context) {
         'About Event',
         style: Theme.of(context)
             .textTheme
-            .titleLarge
+            .titleMedium
             ?.copyWith(fontWeight: FontWeight.bold),
       ),
       SizedBox(height: 16.h),
@@ -264,9 +256,7 @@ Widget _buildEventDescription(BuildContext context) {
             ],
           ),
           borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [
-            BoxShadow(color: Colors.black.withAlpha(13), blurRadius: 15),
-          ],
+          border: Border.all(color: Colors.grey.shade200, width: 1.w),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,7 +271,7 @@ Widget _buildEventDescription(BuildContext context) {
                     borderRadius: BorderRadius.circular(2.r),
                   ),
                 ),
-                SizedBox(width: 12.w),
+                SizedBox(width: 10.w),
                 Text(
                   'Event Highlights',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -294,9 +284,7 @@ Widget _buildEventDescription(BuildContext context) {
             SizedBox(height: 16.h),
             RichText(
               text: TextSpan(
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      height: 1.6,
-                    ),
+                style: Theme.of(context).textTheme.bodyMedium,
                 children: const [
                   TextSpan(
                     text: 'Join us for an ',
@@ -317,30 +305,25 @@ Widget _buildEventDescription(BuildContext context) {
             ),
             _buildFeatureList(context),
             Container(
-              padding: EdgeInsets.all(10.w),
+              padding: EdgeInsets.all(12.w),
               decoration: BoxDecoration(
                 color: AppColors.primary.withAlpha(25),
                 borderRadius: BorderRadius.circular(8.r),
                 border: Border.all(
-                  color: AppColors.primary.withAlpha(51),
-                  width: 1.w,
-                ),
+                    color: AppColors.primary.withAlpha(51), width: 1.w),
               ),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.info_outline_rounded,
-                    color: AppColors.primary,
-                    size: 20.sp,
-                  ),
-                  SizedBox(width: 12.w),
+                  const Icon(Icons.info_outline_rounded,
+                      color: AppColors.primary),
+                  SizedBox(width: 8.w),
                   Expanded(
                     child: Text(
                       'Please arrive 15 minutes early for check-in',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.primary,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: AppColors.primary),
                     ),
                   ),
                 ],
@@ -367,7 +350,7 @@ Widget _buildFeatureList(BuildContext context) {
   return Column(
     children: features.map((feature) {
       return Padding(
-        padding: EdgeInsets.only(bottom: 12.h),
+        padding: EdgeInsets.only(bottom: 16.h),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -378,20 +361,14 @@ Widget _buildFeatureList(BuildContext context) {
                 color: AppColors.primary.withAlpha(25),
                 borderRadius: BorderRadius.circular(8.r),
               ),
-              child: Icon(
-                feature['icon'] as IconData,
-                color: AppColors.primary,
-                size: 18.sp,
-              ),
+              child:
+                  Icon(feature['icon'] as IconData, color: AppColors.primary),
             ),
-            SizedBox(width: 12.w),
+            SizedBox(width: 8.w),
             Expanded(
               child: Text(
                 feature['text'] as String,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.text,
-                      height: 1.4,
-                    ),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ],
@@ -416,7 +393,7 @@ Widget _buildAttendeesSection(
             'Who\'s Going',
             style: Theme.of(context)
                 .textTheme
-                .titleLarge
+                .titleMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
           ),
           Container(
@@ -428,21 +405,21 @@ Widget _buildAttendeesSection(
                   AppColors.primaryDark,
                 ],
               ),
-              borderRadius: BorderRadius.circular(16.r),
+              borderRadius: BorderRadius.circular(20.r),
             ),
             child: Text(
               '${event.attendeesCount} Going',
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodySmall
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
             ),
           ),
         ],
       ),
       SizedBox(height: 16.h),
       Container(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -453,13 +430,7 @@ Widget _buildAttendeesSection(
             ],
           ),
           borderRadius: BorderRadius.circular(12.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withAlpha(13),
-              blurRadius: 15,
-              offset: const Offset(0, 5),
-            ),
-          ],
+          border: Border.all(color: Colors.grey.shade200, width: 1.w),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -467,17 +438,14 @@ Widget _buildAttendeesSection(
             Row(
               children: [
                 _buildEnhancedAvatarStack(),
-                SizedBox(width: 16.w),
+                SizedBox(width: 8.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       RichText(
                         text: TextSpan(
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    color: AppColors.text,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium,
                           children: [
                             TextSpan(
                               text: '${event.attendeesCount - 3}+ others',
@@ -491,19 +459,19 @@ Widget _buildAttendeesSection(
                           ],
                         ),
                       ),
-                      SizedBox(height: 2.h),
                       Text(
                         'Be part of an amazing community',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.text.withAlpha(153),
-                            ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: AppColors.text.withAlpha(153)),
                       ),
                     ],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 16.h),
             _buildSocialProofStats(context, event),
           ],
         ),
@@ -570,12 +538,8 @@ Widget _buildStatCard(
     ),
     child: Column(
       children: [
-        Icon(
-          icon,
-          color: color,
-          size: 20.sp,
-        ),
-        SizedBox(height: 6.h),
+        Icon(icon, color: color),
+        SizedBox(height: 4.h),
         Text(
           value,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -585,7 +549,7 @@ Widget _buildStatCard(
         ),
         Text(
           label,
-          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: AppColors.text.withAlpha(153),
               ),
         ),
@@ -626,14 +590,10 @@ Widget _buildEnhancedAvatarStack() {
               ),
               shape: BoxShape.circle,
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 '+',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(color: Colors.white),
               ),
             ),
           ),

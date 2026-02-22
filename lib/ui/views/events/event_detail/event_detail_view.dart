@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:event_booking/models/event_models.dart';
-import 'package:event_booking/ui/common/app_colors.dart';
 
 import 'event_detail_viewmodel.dart';
 import 'widgets/widgets.dart';
@@ -27,7 +26,6 @@ class EventDetailView extends StackedView<EventDetailViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: CustomScrollView(
         slivers: [
           EventDetailAppBar(

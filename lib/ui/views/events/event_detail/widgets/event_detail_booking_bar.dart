@@ -26,20 +26,14 @@ class EventDetailBookingBar extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.r),
-          topRight: Radius.circular(24.r),
+          topLeft: Radius.circular(16.r),
+          topRight: Radius.circular(16.r),
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(25),
-            blurRadius: 50,
-          ),
-        ],
+        border: Border.all(color: Colors.grey.shade200, width: 1.w),
       ),
       child: SafeArea(
-        minimum: EdgeInsets.only(bottom: 8.h),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(16.w, 20.h, 16.w, 16.h),
+          padding: EdgeInsets.all(16.w),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -51,13 +45,11 @@ class EventDetailBookingBar extends StatelessWidget {
                       children: [
                         Text(
                           'Total Price',
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: AppColors.text.withAlpha(153),
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(color: AppColors.text.withAlpha(153)),
                         ),
-                        SizedBox(height: 4.h),
                         Row(
                           children: [
                             Text(
@@ -85,9 +77,8 @@ class EventDetailBookingBar extends StatelessWidget {
                                       .textTheme
                                       .labelSmall
                                       ?.copyWith(
-                                        color: AppColors.mintGreen,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                          color: AppColors.mintGreen,
+                                          fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ],
@@ -101,7 +92,7 @@ class EventDetailBookingBar extends StatelessWidget {
                       minWidth: 110.w,
                       maxWidth: 132.w,
                     ),
-                    height: 36.h,
+                    height: 32.h,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         begin: Alignment.topLeft,
@@ -110,52 +101,44 @@ class EventDetailBookingBar extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(20.r),
                     ),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(20.r),
-                        onTap: viewModel.isBusy
-                            ? null
-                            : () => viewModel.bookEvent(),
-                        child: Center(
-                          child: viewModel.isBusy
-                              ? SizedBox(
-                                  width: 20.w,
-                                  height: 20.w,
-                                  child: const CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white),
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                              : Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'Book Now',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall
-                                          ?.copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                    SizedBox(width: 6.w),
-                                    Icon(
-                                      Icons.arrow_forward_rounded,
-                                      color: Colors.white,
-                                      size: 16.sp,
-                                    ),
-                                  ],
+                    child: InkWell(
+                      onTap:
+                          viewModel.isBusy ? null : () => viewModel.bookEvent(),
+                      child: Center(
+                        child: viewModel.isBusy
+                            ? SizedBox(
+                                width: 20.w,
+                                height: 20.w,
+                                child: const CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
+                                  strokeWidth: 2,
                                 ),
-                        ),
+                              )
+                            : Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'Book Now',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                  SizedBox(width: 6.w),
+                                  const Icon(Icons.arrow_forward_rounded,
+                                      color: Colors.white),
+                                ],
+                              ),
                       ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 12.h),
+              SizedBox(height: 8.h),
               Flexible(
                 child: Row(
                   children: [
@@ -173,20 +156,13 @@ class EventDetailBookingBar extends StatelessWidget {
                           Flexible(
                             child: Text(
                               'Secure payment',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(
-                                    color: AppColors.text.withAlpha(153),
-                                    fontSize: 11.sp,
-                                  ),
+                              style: Theme.of(context).textTheme.bodySmall,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(width: 8.w),
                     Expanded(
                       flex: 2,
                       child: Row(
@@ -207,8 +183,7 @@ class EventDetailBookingBar extends StatelessWidget {
                                   .bodySmall
                                   ?.copyWith(
                                     color: AppColors.vibrantRed,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 11.sp,
+                                    fontWeight: FontWeight.bold,
                                   ),
                               overflow: TextOverflow.ellipsis,
                             ),

@@ -5,7 +5,6 @@ import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/utils/event_utils.dart';
 import 'package:flutter_svg/svg.dart';
 
-/// Event card widget for displaying events in list format
 class EventCardWidget extends StatelessWidget {
   final Event event;
   final VoidCallback? onTap;
@@ -23,24 +22,25 @@ class EventCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 12.h),
+      margin: EdgeInsets.only(bottom: 16.h),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(color: Colors.grey.shade200),
       ),
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: EdgeInsets.all(8.w),
+          padding: EdgeInsets.all(16.w),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildEventImage(),
-              SizedBox(width: 10.w),
+              SizedBox(width: 8.w),
               Expanded(
                 child: _buildEventInfo(context),
               ),
-              SizedBox(width: 6.w),
+              SizedBox(width: 4.w),
               _buildBookmarkButton(),
             ],
           ),
@@ -61,15 +61,12 @@ class EventCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.r),
         child: Image.asset(
           event.imageUrl ?? '',
-          fit: BoxFit.cover,
+          fit: BoxFit.fill,
           errorBuilder: (context, error, stackTrace) {
             return EventUtils.getCategoryIcon(event.category).isNotEmpty
                 ? Center(
                     child: SvgPicture.asset(
-                      EventUtils.getCategoryIcon(event.category),
-                      width: 24.w,
-                      height: 24.w,
-                    ),
+                        EventUtils.getCategoryIcon(event.category)),
                   )
                 : Icon(Icons.event, color: Colors.white, size: 24.sp);
           },
@@ -83,6 +80,7 @@ class EventCardWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
@@ -92,13 +90,9 @@ class EventCardWidget extends StatelessWidget {
               ),
               child: Text(
                 event.category.toUpperCase(),
-                style: Theme.of(context)
-                    .textTheme
-                    .labelSmall
-                    ?.copyWith(fontWeight: FontWeight.w600),
+                style: Theme.of(context).textTheme.labelSmall,
               ),
             ),
-            const Spacer(),
             Text(
               _formatPrice(event.price),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -106,7 +100,7 @@ class EventCardWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 6.h),
+        SizedBox(height: 4.h),
         Text(
           event.title,
           style: Theme.of(context)
@@ -181,34 +175,30 @@ class EventCardWidget extends StatelessWidget {
             : Colors.grey.shade100,
         borderRadius: BorderRadius.circular(8.r),
       ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: isBookmarkLoading ? null : onBookmarkTap,
-          borderRadius: BorderRadius.circular(8.r),
-          child: isBookmarkLoading
-              ? Center(
-                  child: SizedBox(
-                    width: 16.w,
-                    height: 16.w,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        event.isBookmarked
-                            ? AppColors.vibrantRed
-                            : Colors.grey.shade400,
-                      ),
+      child: InkWell(
+        onTap: isBookmarkLoading ? null : onBookmarkTap,
+        child: isBookmarkLoading
+            ? Center(
+                child: SizedBox(
+                  width: 16.w,
+                  height: 16.w,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      event.isBookmarked
+                          ? AppColors.vibrantRed
+                          : Colors.grey.shade400,
                     ),
                   ),
-                )
-              : Icon(
-                  event.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                  size: 16.sp,
-                  color: event.isBookmarked
-                      ? AppColors.vibrantRed
-                      : Colors.grey.shade400,
                 ),
-        ),
+              )
+            : Icon(
+                event.isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                size: 16.sp,
+                color: event.isBookmarked
+                    ? AppColors.vibrantRed
+                    : Colors.grey.shade400,
+              ),
       ),
     );
   }

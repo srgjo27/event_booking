@@ -52,10 +52,7 @@ class HomeEventCardWidget extends StatelessWidget {
         color:
             hasValidImage ? null : EventUtils.getCategoryColor(event.category),
         image: hasValidImage
-            ? DecorationImage(
-                image: AssetImage(event.imageUrl!),
-                fit: BoxFit.cover,
-              )
+            ? DecorationImage(image: AssetImage(event.imageUrl!))
             : null,
       ),
       child: Stack(
@@ -91,21 +88,20 @@ class HomeEventCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Text(
             event.day,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: AppColors.vibrantRed,
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(color: AppColors.vibrantRed),
           ),
           Text(
             event.month,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: AppColors.vibrantRed,
-                  fontWeight: FontWeight.w500,
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .labelSmall
+                ?.copyWith(color: AppColors.vibrantRed),
           ),
         ],
       ),
@@ -133,10 +129,11 @@ class HomeEventCardWidget extends StatelessWidget {
         children: [
           Text(
             event.title,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
-            maxLines: 1,
+            style: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(fontWeight: FontWeight.bold),
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
           _buildAttendeesRow(),
@@ -174,7 +171,7 @@ class HomeEventCardWidget extends StatelessWidget {
           viewModel.formatAttendeesCount(event.attendeesCount),
           style: TextStyle(
             color: AppColors.primary,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w600,
             fontSize: 12.sp,
           ),
         ),
@@ -185,16 +182,16 @@ class HomeEventCardWidget extends StatelessWidget {
   Widget _buildLocationRow(BuildContext context) {
     return Row(
       children: [
-        Icon(Icons.location_on, color: Colors.grey.shade400, size: 16.sp),
-        SizedBox(width: 6.w),
+        Icon(Icons.location_on, color: Colors.grey.shade300, size: 12.sp),
+        SizedBox(width: 4.w),
         Expanded(
           child: Text(
             event.address,
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
-                ?.copyWith(color: Colors.grey.shade500, fontSize: 12.sp),
-            maxLines: 1,
+                ?.copyWith(color: Colors.grey.shade500, fontSize: 11.sp),
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
         ),

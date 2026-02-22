@@ -30,7 +30,7 @@ class EventDetailAppBar extends StatelessWidget {
         margin: EdgeInsets.only(left: 16.w, top: 8.h),
         child: _buildGlassmorphismButton(
           child:
-              Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 20.sp),
+              Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 16.sp),
           onTap: () => viewModel.goBack(),
         ),
       ),
@@ -41,7 +41,7 @@ class EventDetailAppBar extends StatelessWidget {
             child: Icon(
               viewModel.isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
               color: Colors.white,
-              size: 20.sp,
+              size: 16.sp,
             ),
             onTap: () => viewModel.toggleBookmark(),
           ),
@@ -54,13 +54,7 @@ class EventDetailAppBar extends StatelessWidget {
             Hero(
               tag: 'event_image_${event.id}',
               child: hasValidImage
-                  ? Image.asset(
-                      event.imageUrl!,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return _buildEventPlaceholder();
-                      },
-                    )
+                  ? Image.asset(event.imageUrl!, fit: BoxFit.fill)
                   : _buildEventPlaceholder(),
             ),
           ],
@@ -74,15 +68,15 @@ class EventDetailAppBar extends StatelessWidget {
     required VoidCallback onTap,
   }) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12.r),
+      borderRadius: BorderRadius.circular(8.r),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
-          width: 44.w,
-          height: 44.w,
+          width: 40.w,
+          height: 40.h,
           decoration: BoxDecoration(
             color: Colors.white.withAlpha(51),
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
               color: Colors.white.withAlpha(76),
               width: 1.w,
@@ -124,7 +118,6 @@ class EventDetailAppBar extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white.withAlpha(179),
                 fontWeight: FontWeight.bold,
-                letterSpacing: 2,
                 fontSize: 16.sp,
               ),
             ),
