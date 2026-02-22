@@ -13,7 +13,7 @@ class NotificationService {
   /// Handle notification tap when app is opened
   static void handleNotificationTap(RemoteMessage message) {
     if (kDebugMode) {
-      print('📱 Handling notification tap: ${message.messageId}');
+      print('Handling notification tap: ${message.messageId}');
     }
 
     final data = message.data;
@@ -32,7 +32,7 @@ class NotificationService {
   /// Handle foreground notification
   static void handleForegroundNotification(RemoteMessage message) {
     if (kDebugMode) {
-      print('📨 Handling foreground notification: ${message.messageId}');
+      print('Handling foreground notification: ${message.messageId}');
     }
 
     // TODO: Show in-app notification or update UI
@@ -46,7 +46,7 @@ class NotificationService {
     _navigationService.navigateTo(Routes.mainView);
 
     if (kDebugMode) {
-      print('📱 Should navigate to event detail: $eventId');
+      print('Should navigate to event detail: $eventId');
     }
   }
 
@@ -77,7 +77,7 @@ class NotificationService {
     await FirebaseMessaging.instance.subscribeToTopic('bookings');
 
     if (kDebugMode) {
-      print('✅ Subscribed to event notification topics');
+      print('Subscribed to event notification topics');
     }
   }
 
@@ -86,7 +86,7 @@ class NotificationService {
     await FirebaseMessaging.instance.subscribeToTopic('user_$userId');
 
     if (kDebugMode) {
-      print('✅ Subscribed to user-specific topics: user_$userId');
+      print('Subscribed to user-specific topics: user_$userId');
     }
   }
 
@@ -96,7 +96,7 @@ class NotificationService {
     await FirebaseMessaging.instance.unsubscribeFromTopic('bookings');
 
     if (kDebugMode) {
-      print('✅ Unsubscribed from all notification topics');
+      print('Unsubscribed from all notification topics');
     }
   }
 }

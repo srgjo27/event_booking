@@ -17,33 +17,26 @@ class VerficationView extends StackedView<VerficationViewModel> {
     Widget? child,
   ) {
     final defaultPinTheme = PinTheme(
-      width: 60.w,
-      height: 60.h,
+      width: 50.w,
+      height: 50.h,
       textStyle: Theme.of(context)
           .textTheme
           .titleLarge
-          ?.copyWith(fontWeight: FontWeight.w500),
+          ?.copyWith(fontWeight: FontWeight.w600),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(color: Colors.grey.shade300),
+        border: Border.all(color: Colors.grey.shade200),
       ),
     );
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.sp),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
+      appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 0),
+        padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20.h),
             Text(
               'Verification',
               style: Theme.of(context)
@@ -51,14 +44,9 @@ class VerficationView extends StackedView<VerficationViewModel> {
                   .headlineMedium
                   ?.copyWith(fontWeight: FontWeight.w600),
             ),
-            SizedBox(height: 10.h),
-            Text(
-              'We\'ve send you the verification\ncode on +1 2620 0323 7631',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(height: 1.2.h),
-            ),
+            SizedBox(height: 12.h),
+            Text('We\'ve send you the verification\ncode on +1 2620 0323 7631',
+                style: Theme.of(context).textTheme.bodyLarge),
             SizedBox(height: 32.h),
             Center(
               child: Pinput(
@@ -72,14 +60,14 @@ class VerficationView extends StackedView<VerficationViewModel> {
                 onCompleted: (pin) => viewModel.verifyCode(),
               ),
             ),
-            SizedBox(height: 28.h),
+            SizedBox(height: 20.h),
             PrimaryButton(
               text: 'CONTINUE',
               onPressed: viewModel.verifyCode,
               icon: Icons.arrow_forward,
               color: AppColors.primary,
             ),
-            SizedBox(height: 28.h),
+            SizedBox(height: 20.h),
             Center(
               child: viewModel.canResend
                   ? TextButton(

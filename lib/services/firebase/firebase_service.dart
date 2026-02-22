@@ -67,7 +67,7 @@ class FirebaseService {
     );
 
     if (kDebugMode) {
-      print('🔔 Notification permission: ${settings.authorizationStatus}');
+      print('Notification permission: ${settings.authorizationStatus}');
     }
   }
 

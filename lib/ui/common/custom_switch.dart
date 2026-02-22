@@ -42,7 +42,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
           borderRadius: BorderRadius.circular(13.r),
           color: _isOn ? AppColors.primary : Colors.grey.shade200,
           border: Border.all(
-            color: _isOn ? AppColors.primary : Colors.grey.shade400,
+            color: _isOn ? AppColors.primary : Colors.grey.shade200,
             width: 1.w,
           ),
         ),
@@ -59,7 +59,7 @@ class _CustomSwitchState extends State<CustomSwitch> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(
-                    color: _isOn ? AppColors.primary : Colors.grey.shade400,
+                    color: _isOn ? AppColors.primary : Colors.grey.shade200,
                     width: 1.w,
                   ),
                 ),

@@ -24,7 +24,7 @@ class LoginView extends StackedView<LoginViewModel> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
+            margin: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 16.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,7 +41,7 @@ class LoginView extends StackedView<LoginViewModel> {
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium
-                      ?.copyWith(fontWeight: FontWeight.w500),
+                      ?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 20.h),
                 CustomTextField(
@@ -64,8 +64,7 @@ class LoginView extends StackedView<LoginViewModel> {
                           )
                         : SvgPicture.asset(
                             AppIcons.icHidden,
-                            colorFilter: ColorFilter.mode(
-                                Colors.grey.shade300, BlendMode.srcIn),
+                            color: Colors.grey.shade300,
                             width: 24.w,
                           ),
                     onPressed: viewModel.togglePasswordVisibility,
@@ -104,7 +103,7 @@ class LoginView extends StackedView<LoginViewModel> {
                   color: AppColors.primary,
                   icon: Icons.arrow_forward,
                 ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 20.h),
                 Center(
                   child: Text('OR',
                       style: Theme.of(context)
@@ -112,7 +111,7 @@ class LoginView extends StackedView<LoginViewModel> {
                           .bodyMedium
                           ?.copyWith(fontWeight: FontWeight.w500)),
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: 20.h),
                 _buildSocialLoginButton(
                   onPressed: viewModel.loginWithGoogle,
                   iconPath: AppImages.imgGoogleLogo,
@@ -150,7 +149,7 @@ class LoginView extends StackedView<LoginViewModel> {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.r),
-            side: BorderSide(color: Colors.grey.shade300),
+            side: BorderSide(color: Colors.grey.shade200),
           ),
         ),
         icon: Image.asset(iconPath),

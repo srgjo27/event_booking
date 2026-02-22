@@ -5,7 +5,6 @@ import 'package:event_booking/models/event_models.dart';
 import 'package:event_booking/ui/common/app_colors.dart';
 import '../home_viewmodel.dart';
 
-/// Event card widget for displaying individual event information
 class HomeEventCardWidget extends StatelessWidget {
   final Event event;
   final HomeViewModel viewModel;

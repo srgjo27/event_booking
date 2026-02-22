@@ -107,17 +107,17 @@ class HomeHeaderWidget extends StatelessWidget {
               hintText: 'Search',
               hintStyle: const TextStyle(color: Colors.white),
               prefixIcon: Padding(
-                padding: EdgeInsets.all(8.w),
+                padding: EdgeInsets.all(12.w),
                 child: SvgPicture.asset(AppIcons.icSearch),
               ),
               filled: true,
               fillColor: Colors.white.withAlpha(100),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(12.r),
                 borderSide: BorderSide.none,
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10.r),
+                borderRadius: BorderRadius.circular(12.r),
                 borderSide:
                     BorderSide(color: Colors.white.withAlpha(150), width: 1.w),
               ),

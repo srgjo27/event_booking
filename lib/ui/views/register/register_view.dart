@@ -20,15 +20,10 @@ class RegisterView extends StackedView<RegisterViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.sp),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 0),
+          padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -37,7 +32,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
                 style: Theme.of(context)
                     .textTheme
                     .headlineMedium
-                    ?.copyWith(fontWeight: FontWeight.w500),
+                    ?.copyWith(fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 16.h),
               CustomTextField(
@@ -67,8 +62,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
                         )
                       : SvgPicture.asset(
                           AppIcons.icHidden,
-                          colorFilter: ColorFilter.mode(
-                              Colors.grey.shade300, BlendMode.srcIn),
+                          color: Colors.grey.shade300,
                           width: 24.w,
                         ),
                   onPressed: viewModel.togglePasswordVisibility,
@@ -88,21 +82,20 @@ class RegisterView extends StackedView<RegisterViewModel> {
                         )
                       : SvgPicture.asset(
                           AppIcons.icHidden,
-                          colorFilter: ColorFilter.mode(
-                              Colors.grey.shade300, BlendMode.srcIn),
+                          color: Colors.grey.shade300,
                           width: 24.w,
                         ),
                   onPressed: viewModel.togglePasswordVisibility,
                 ),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 20.h),
               PrimaryButton(
                 text: 'SIGN UP',
                 onPressed: viewModel.signUp,
                 color: AppColors.primary,
                 icon: Icons.arrow_forward,
               ),
-              SizedBox(height: 24.h),
+              SizedBox(height: 20.h),
               Center(
                 child: Text('OR',
                     style: Theme.of(context)
@@ -110,7 +103,7 @@ class RegisterView extends StackedView<RegisterViewModel> {
                         .bodyMedium
                         ?.copyWith(fontWeight: FontWeight.w500)),
               ),
-              SizedBox(height: 16.h),
+              SizedBox(height: 20.h),
               _buildSocialLoginButton(
                 onPressed: viewModel.loginWithGoogle,
                 iconPath: AppImages.imgGoogleLogo,
@@ -146,8 +139,8 @@ class RegisterView extends StackedView<RegisterViewModel> {
           foregroundColor: AppColors.text,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.r),
-            side: BorderSide(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(12.r),
+            side: BorderSide(color: Colors.grey.shade200),
           ),
         ),
         icon: Image.asset(iconPath, width: 24.w),

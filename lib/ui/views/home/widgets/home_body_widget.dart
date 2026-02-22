@@ -19,7 +19,7 @@ class HomeBodyWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 32.h),
+          SizedBox(height: 28.h),
           _buildSectionHeader(context),
           SizedBox(height: 16.h),
           _buildEventsHorizontalList(),
@@ -39,7 +39,7 @@ class HomeBodyWidget extends StatelessWidget {
             style: Theme.of(context)
                 .textTheme
                 .titleLarge
-                ?.copyWith(fontWeight: FontWeight.w500, fontSize: 16.sp),
+                ?.copyWith(fontWeight: FontWeight.w600, fontSize: 16.sp),
           ),
           _buildSeeAllButton(context),
         ],
@@ -50,16 +50,15 @@ class HomeBodyWidget extends StatelessWidget {
   Widget _buildSeeAllButton(BuildContext context) {
     return TextButton.icon(
       onPressed: () {},
-      label: Text(
-        'See All',
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium
-            ?.copyWith(color: Colors.grey.shade500),
-      ),
+      label: const Text('See All'),
       icon: SvgPicture.asset(AppIcons.icArrowRight),
       iconAlignment: IconAlignment.end,
       style: TextButton.styleFrom(
+        foregroundColor: Colors.grey.shade500,
+        textStyle: TextStyle(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w400,
+        ),
         padding: EdgeInsets.zero,
         minimumSize: Size.zero,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
