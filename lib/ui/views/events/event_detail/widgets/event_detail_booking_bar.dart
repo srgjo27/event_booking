@@ -1,5 +1,6 @@
 import 'package:event_booking/ui/common/app_colors.dart';
 import 'package:event_booking/ui/views/events/event_detail/event_detail_viewmodel.dart';
+import 'package:event_booking/utils/format_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,13 +11,6 @@ class EventDetailBookingBar extends StatelessWidget {
     Key? key,
     required this.viewModel,
   }) : super(key: key);
-
-  String _formatPrice(double price) {
-    if (price == 0) {
-      return 'FREE';
-    }
-    return '\$${price.toStringAsFixed(0)}';
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +47,7 @@ class EventDetailBookingBar extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              _formatPrice(event.price),
+                              FormatHelpers.formatPrice(event.price),
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineMedium

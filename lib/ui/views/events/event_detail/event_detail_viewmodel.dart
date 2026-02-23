@@ -1,5 +1,6 @@
 import 'package:event_booking/app/app.locator.dart';
 import 'package:event_booking/models/event_models.dart';
+import 'package:event_booking/utils/format_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -40,17 +41,8 @@ class EventDetailViewModel extends BaseViewModel {
     });
   }
 
-  String formatPrice(double price) {
-    if (price == 0) {
-      return 'Free';
-    }
-    return '\$${price.toStringAsFixed(0)}';
-  }
+  String formatPrice(double price) => FormatHelpers.formatPrice(price);
 
-  String formatAttendeesCount(int count) {
-    if (count >= 1000) {
-      return '${(count / 1000).toStringAsFixed(0)}K+ Going';
-    }
-    return '$count Going';
-  }
+  String formatAttendeesCount(int count) =>
+      FormatHelpers.formatAttendeesCount(count);
 }

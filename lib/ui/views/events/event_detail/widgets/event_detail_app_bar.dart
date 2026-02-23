@@ -54,7 +54,10 @@ class EventDetailAppBar extends StatelessWidget {
             Hero(
               tag: 'event_image_${event.id}',
               child: hasValidImage
-                  ? Image.asset(event.imageUrl!, fit: BoxFit.fill)
+                  ? Image.asset(
+                      event.imageUrl!,
+                      fit: BoxFit.cover,
+                    )
                   : _buildEventPlaceholder(),
             ),
           ],

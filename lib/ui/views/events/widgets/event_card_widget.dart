@@ -1,3 +1,4 @@
+import 'package:event_booking/utils/format_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:event_booking/models/event_models.dart';
@@ -50,6 +51,8 @@ class EventCardWidget extends StatelessWidget {
   }
 
   Widget _buildEventImage() {
+    final hasValidImage = event.imageUrl != null && event.imageUrl!.isNotEmpty;
+
     return Container(
       width: 60.w,
       height: 60.w,
@@ -59,20 +62,24 @@ class EventCardWidget extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12.r),
-        child: Image.asset(
-          event.imageUrl ?? '',
-          fit: BoxFit.fill,
-          errorBuilder: (context, error, stackTrace) {
-            return EventUtils.getCategoryIcon(event.category).isNotEmpty
-                ? Center(
-                    child: SvgPicture.asset(
-                        EventUtils.getCategoryIcon(event.category)),
-                  )
-                : Icon(Icons.event, color: Colors.white, size: 24.sp);
-          },
-        ),
+        child: hasValidImage
+            ? Image.asset(
+                event.imageUrl!,
+                fit: BoxFit.fill,
+              )
+            : _buildImagePlaceholder(),
       ),
     );
+  }
+
+  Widget _buildImagePlaceholder() {
+    return EventUtils.getCategoryIcon(event.category).isNotEmpty
+        ? Center(
+            child: SvgPicture.asset(
+              EventUtils.getCategoryIcon(event.category),
+            ),
+          )
+        : Icon(Icons.event, color: Colors.white, size: 24.sp);
   }
 
   Widget _buildEventInfo(BuildContext context) {
@@ -94,7 +101,7 @@ class EventCardWidget extends StatelessWidget {
               ),
             ),
             Text(
-              _formatPrice(event.price),
+              FormatHelpers.formatPrice(event.price),
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                   color: AppColors.primary, fontWeight: FontWeight.bold),
             ),
@@ -154,7 +161,7 @@ class EventCardWidget extends StatelessWidget {
             ),
             SizedBox(width: 4.w),
             Text(
-              _formatAttendeesCount(event.attendeesCount),
+              FormatHelpers.formatAttendeesCount(event.attendeesCount),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: AppColors.text.withAlpha(153),
                   ),
@@ -201,19 +208,5 @@ class EventCardWidget extends StatelessWidget {
               ),
       ),
     );
-  }
-
-  String _formatPrice(double price) {
-    if (price == 0) {
-      return 'Free';
-    }
-    return '\$${price.toStringAsFixed(0)}';
-  }
-
-  String _formatAttendeesCount(int count) {
-    if (count >= 1000) {
-      return '${(count / 1000).toStringAsFixed(0)}K+ Going';
-    }
-    return '$count Going';
   }
 }

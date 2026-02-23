@@ -126,7 +126,7 @@ class _EventCardShimmerState extends State<EventCardShimmer>
                 Colors.grey.shade100,
                 Colors.grey.shade200,
               ],
-              stops: [
+              stops: const [
                 0.0,
                 0.5,
                 1.0,

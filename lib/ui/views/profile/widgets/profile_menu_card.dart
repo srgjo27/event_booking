@@ -18,13 +18,7 @@ class ProfileMenuCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(25),
-            blurRadius: 1,
-            offset: const Offset(0, 1),
-          ),
-        ],
+        border: Border.all(color: Colors.grey.shade100, width: 1.w),
       ),
       child: Column(
         children: [

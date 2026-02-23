@@ -33,12 +33,12 @@ class ProfileHeader extends StatelessWidget {
             SizedBox(height: 16.h),
             Text(
               'Profile',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 32.h),
+            SizedBox(height: 40.h),
           ],
         ),
       ),

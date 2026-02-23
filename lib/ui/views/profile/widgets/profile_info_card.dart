@@ -29,17 +29,10 @@ class ProfileInfoCard extends StatelessWidget {
 
   Widget _buildProfilePicture() {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(2.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(60.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withAlpha(25),
-            blurRadius: 1,
-            offset: const Offset(0, 1),
-          ),
-        ],
       ),
       child: CircleAvatar(
         radius: 50.r,
@@ -63,7 +56,6 @@ class ProfileInfoCard extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 4.h),
         Text(
           viewModel.userEmail,
           style: TextStyle(
@@ -71,7 +63,6 @@ class ProfileInfoCard extends StatelessWidget {
             color: AppColors.text.withAlpha(153),
           ),
         ),
-        SizedBox(height: 8.h),
         Text(
           viewModel.userPhone,
           style: TextStyle(
@@ -89,14 +80,11 @@ class ProfileInfoCard extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
-        padding: EdgeInsets.symmetric(
-          horizontal: 24.w,
-          vertical: 10.h,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(32.r),
+          borderRadius: BorderRadius.circular(36.r),
         ),
-        elevation: 1,
+        elevation: 0,
       ),
       child: Text(
         'Edit Profile',

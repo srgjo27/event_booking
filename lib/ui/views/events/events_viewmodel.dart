@@ -2,6 +2,7 @@ import 'package:event_booking/app/app.locator.dart';
 import 'package:event_booking/app/app.router.dart';
 import 'package:event_booking/models/event_models.dart';
 import 'package:event_booking/mixins/loading_mixin.dart';
+import 'package:event_booking/ui/common/app_images.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -98,7 +99,7 @@ class EventsViewModel extends BaseViewModel with LoadingMixin {
         day: '15',
         time: '18:00',
         attendeesCount: 120,
-        imageUrl: 'assets/images/event_music.jpg',
+        imageUrl: AppImages.imgIllustrationMusicEvent,
         category: 'Music',
         price: 25.0,
         isBookmarked: true,
@@ -112,7 +113,7 @@ class EventsViewModel extends BaseViewModel with LoadingMixin {
         day: '30',
         time: '12:00',
         attendeesCount: 85,
-        imageUrl: 'assets/images/event_food.jpg',
+        imageUrl: null,
         category: 'Food',
         price: 15.0,
         isBookmarked: false,
@@ -126,7 +127,7 @@ class EventsViewModel extends BaseViewModel with LoadingMixin {
         day: '05',
         time: '10:00',
         attendeesCount: 45,
-        imageUrl: 'assets/images/event_art.jpg',
+        imageUrl: null,
         category: 'Art',
         price: 0.0,
         isBookmarked: true,
@@ -140,7 +141,7 @@ class EventsViewModel extends BaseViewModel with LoadingMixin {
         day: '20',
         time: '15:30',
         attendeesCount: 500,
-        imageUrl: 'assets/images/event_sports.jpg',
+        imageUrl: null,
         category: 'Sports',
         price: 35.0,
         isBookmarked: false,
@@ -154,7 +155,7 @@ class EventsViewModel extends BaseViewModel with LoadingMixin {
         day: '28',
         time: '20:00',
         attendeesCount: 80,
-        imageUrl: 'assets/images/event_jazz.jpg',
+        imageUrl: null,
         category: 'Music',
         price: 30.0,
         isBookmarked: true,
@@ -168,7 +169,7 @@ class EventsViewModel extends BaseViewModel with LoadingMixin {
         day: '10',
         time: '09:00',
         attendeesCount: 250,
-        imageUrl: 'assets/images/event_tech.jpg',
+        imageUrl: null,
         category: 'Technology',
         price: 50.0,
         isBookmarked: false,
@@ -198,12 +199,10 @@ class EventsViewModel extends BaseViewModel with LoadingMixin {
           _pastEvents.add(event);
         }
       } catch (e) {
-        // If date parsing fails, add to past events as fallback
         _pastEvents.add(event);
       }
     }
 
-    // Sort events by date
     _nowEvents.sort((a, b) => a.time.compareTo(b.time));
     _upcomingEvents.sort((a, b) => a.eventDate.compareTo(b.eventDate));
     _pastEvents.sort((a, b) => b.eventDate.compareTo(a.eventDate));
